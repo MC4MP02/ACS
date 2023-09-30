@@ -6,12 +6,13 @@ import org.json.JSONObject;
 
 public class Door {
   private final String id;
-  private boolean closed; // physically
+  private boolean closed;
   public DoorState state;
 
   public Door(String id) {
     this.id = id;
     closed = true;
+    state = new Unlocked(this);
   }
 
   public void processRequest(RequestReader request) {
@@ -29,26 +30,21 @@ public class Door {
   public void setState(DoorState doorStates) {
     state = doorStates;
   }
+
   private void doAction(String action) {
     switch (action) {
       case Actions.OPEN:
-        if (closed) {
-          closed = false;
-        } else {
-          System.out.println("Can't open door " + id + " because it's already open");
-        }
+        state.open();
         break;
       case Actions.CLOSE:
-        if (closed) {
-          System.out.println("Can't close door " + id + " because it's already closed");
-        } else {
-          closed = true;
-        }
+        state.close();
         break;
       case Actions.LOCK:
-
+        state.lock();
+        break;
       case Actions.UNLOCK:
-
+        state.unlock();
+        break;
       case Actions.UNLOCK_SHORTLY:
         System.out.println("Action " + action + " not implemented yet");
         break;
