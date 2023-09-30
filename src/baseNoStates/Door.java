@@ -46,13 +46,10 @@ public class Door {
         }
         break;
       case Actions.LOCK:
-        // TODO
-        // fall through
+
       case Actions.UNLOCK:
-        // TODO
-        // fall through
+
       case Actions.UNLOCK_SHORTLY:
-        // TODO
         System.out.println("Action " + action + " not implemented yet");
         break;
       default:
@@ -65,12 +62,14 @@ public class Door {
     return closed;
   }
 
+  public void setClosed(boolean closed) { this.closed = closed; }
+
   public String getId() {
     return id;
   }
 
   public String getStateName() {
-    return "unlocked";
+    return state.name;
   }
 
   @Override

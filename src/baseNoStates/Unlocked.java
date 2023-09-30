@@ -2,7 +2,7 @@ package baseNoStates;
 
 public class Unlocked extends DoorState {
 
-  public DoorState(Door door) {
+  public Unlocked(Door door) {
     super(door);
   }
   public void open() {
@@ -11,8 +11,13 @@ public class Unlocked extends DoorState {
   public void close() {
 
   }
+  @Override
   public void lock() {
-
+    if (door.isClosed()) {
+      super.lock();
+    } else {
+      System.out.println("Can't lock the door. It's not closed.");
+    }
   }
   public void unlock() {
 
