@@ -16,6 +16,7 @@ abstract public class DoorState{
   public void lock() {}
 
   public void unlock() {}
+  public void unlock_shorty() {}
   public String getName() {
     return name;
   }

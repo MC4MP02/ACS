@@ -1,16 +1,18 @@
 package baseNoStates;
 
+import baseNoStates.requests.RequestArea;
+import java.util.List;
+import java.util.ArrayList;
+
 public class Area {
-    private final String id;
-    public Area(String id){
-        this.id = id;
-    }
-    public String getId(){return id;}
+  private final String id;
+  private List<Door> doors;
 
-    //public Door getDoorsGivingAccess(){
+  public Area(String id) {
+    this.id = id;
+  }
 
-    //}
+  public String getId() { return id; }
 
-
-
+  //public List<Door> getDoorsGivingAccess() { }
 }
