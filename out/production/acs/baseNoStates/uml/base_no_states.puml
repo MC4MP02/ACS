@@ -67,9 +67,7 @@ abstract class DoorState{
 }
 
 class Unlocked extends DoorState {
-#door : Door
-#name : String
-+ DoorState(door : Door)
++ Unlocked(door : Door)
 + open()
 + close()
 + lock()
@@ -77,9 +75,15 @@ class Unlocked extends DoorState {
 }
 
 class Locked extends DoorState {
-#door : Door
-#name : String
-+ DoorState(door : Door)
++ Locked(door : Door)
++ open()
++ close()
++ lock()
++ unlock()
+}
+
+class Unlocked_shortly extends DoorState {
++ Unlocked_shortly(door : Door)
 + open()
 + close()
 + lock()
@@ -89,6 +93,7 @@ class Locked extends DoorState {
 class States {
 + {static} LOCKED : String
 + {static} UNLOCKED : String
++ {static} UNLOCKED_SHORTLY : String
 }
 
 class Actions {
@@ -96,6 +101,14 @@ class Actions {
 + {static} UNLOCKED : String
 + {static} OPEN : String
 + {static} CLOSE : String
+}
+
+class Area {
+-id : String
+-doors : List<Door>
++ Area(id : String)
++ getId(id : String) : String
++ getDoorsGivingAccess() : List<Door>
 }
 
 class User {
