@@ -6,6 +6,7 @@ public class Unlocked extends DoorState {
     super(door);
     setName(States.UNLOCKED);
   }
+
   public void open() {
     if (door.isClosed() && name.equals(States.UNLOCKED)) {
       door.setClosed(false);
@@ -13,6 +14,7 @@ public class Unlocked extends DoorState {
       System.out.println("Can't open door " + door.getId() + " because it's already open");
     }
   }
+
   public void close() {
     if(!door.isClosed()) {
       door.setClosed(true);
@@ -33,7 +35,11 @@ public class Unlocked extends DoorState {
   }
 
   public void unlock() {
-    System.out.println("Can't close door " + door.getId() + " because it's already unlocked");
+    System.out.println("Can't unlock door " + door.getId() + " because it's already unlocked");
+  }
+
+  public void unlock_shorty() {
+    System.out.println("Can't unlock_shortly door " + door.getId() + " because it's already unlocked");
   }
 }
 
