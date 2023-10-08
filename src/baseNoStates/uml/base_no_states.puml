@@ -45,6 +45,7 @@ DirectoryUsers --> "*" User : "users"
 class Door {
 - id : String
 - closed : boolean
++ state : DoorState
 + Door(id : String)
 + processRequest(request : RequestReader)
 + setState(doorState : DoorState)
@@ -64,26 +65,37 @@ abstract class DoorState{
 + close()
 + lock()
 + unlock()
++ unlockShortly()
+'+ setName(name : String)
+'+ getName() : String
 }
 
 class Unlocked extends DoorState {
+#door : Door
+#name : String
 + Unlocked(door : Door)
 + open()
 + close()
 + lock()
 + unlock()
++ unlockShortly()
 }
 
 class Locked extends DoorState {
+#door : Door
+#name : String
 + Locked(door : Door)
 + open()
 + close()
 + lock()
 + unlock()
++ unlockShortly()
 }
 
-class Unlocked_shortly extends DoorState {
-+ Unlocked_shortly(door : Door)
+class UnlockedShortly extends DoorState {
+#door : Door
+#name : String
++ UnlockedShortly(door : Door)
 + open()
 + close()
 + lock()
@@ -93,22 +105,15 @@ class Unlocked_shortly extends DoorState {
 class States {
 + {static} LOCKED : String
 + {static} UNLOCKED : String
-+ {static} UNLOCKED_SHORTLY : String
++ {static} UNLOCKED_SHORTLY: String
 }
 
 class Actions {
-+ {static} LOCKED : String
-+ {static} UNLOCKED : String
++ {static} LOCK : String
++ {static} UNLOCK : String
 + {static} OPEN : String
 + {static} CLOSE : String
-}
-
-class Area {
--id : String
--doors : List<Door>
-+ Area(id : String)
-+ getId(id : String) : String
-+ getDoorsGivingAccess() : List<Door>
++ {static} UNLOCK_SHORTLY: String
 }
 
 class User {
@@ -117,6 +122,25 @@ class User {
 + User(name: String, credential: String)
 + toString() : String
 }
+
+
+class Area {
+- id : String
+- door : List<Door>
++ Area(id : String)
+'+ getId() : String
+}
+
+
+
+class DirectoryAreas {
+- {static} allAreas : Area[]
++ {static} makeAreas()
++ {static} findAreaById(id : String) : Area
++ {static} getAllAreas() : Area[]
+}
+
+DirectoryAreas --> "*" Area : "allAreas"
 
 
 class Main {
@@ -129,6 +153,8 @@ DiretoryUsers.makeUsers()
 new Webserver()
 end note
 
+DirectoryAreas -[hidden]right- Area
+Area -[hidden]up- User
 Main -[hidden]down- Webserver
 Webserver -[hidden]down- DirectoryDoors
 DirectoryDoors -[hidden]right- DirectoryUsers
