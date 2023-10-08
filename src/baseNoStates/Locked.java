@@ -44,7 +44,6 @@ public class Locked extends DoorState {
           else {
             door.setState(new Propped(door));
           }
-
         }
       }, 10000);
     }

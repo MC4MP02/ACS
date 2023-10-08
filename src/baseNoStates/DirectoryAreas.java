@@ -10,6 +10,7 @@ public final class DirectoryAreas {
 
     public static void makeAreas() {
       ArrayList<Door> allDoors = new ArrayList<Door>(DirectoryDoors.getAllDoors());
+
       Partitions basement = new Partitions("basement");
       Partitions ground_floor = new Partitions("ground_floor");
       Partitions floor1 = new Partitions("floor1");
