@@ -15,10 +15,12 @@ abstract public class Area {
 
   public String getId() { return id; }
 
-  abstract Area getFrom();
+  abstract public Area getFrom();
 
   abstract public ArrayList<Door> getDoors();
 
   abstract public ArrayList<Door> getDoorsGivingAccess();
+
+  abstract public ArrayList<Area> getAreas();
 }
 

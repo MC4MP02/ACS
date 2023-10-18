@@ -5,6 +5,7 @@ import baseNoStates.*;
 import java.time.*;
 import java.util.ArrayList;
 
+import com.sun.source.tree.DirectiveTree;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -107,23 +108,23 @@ public class RequestReader implements Request {
       ArrayList<User> users = userGroup.getUsers();
 
       boolean areaTrue = false;
-      System.out.println(area.get(0).getId());
-      System.out.println(area.get(1).getId());
-      System.out.println(area.get(0).getDoors());
-      System.out.println(area.get(1).getDoors());
-      for (int i = 0; i < area.size(); i++) {
-        ArrayList<Door> actualAreaDoors = area.get(i).getDoors();
-        for (int j = 0; j < actualAreaDoors.size(); j++) {
-          if(door == actualAreaDoors.get(j)) {
-            areaTrue = true;
-          }
+      for (Area areas : area) {
+        if (door.getTo().getFrom() == areas || door.getTo() == areas) {
+          areaTrue = true;
         }
       }
+
       boolean daysTrue = days.contains(now.getDayOfWeek());
       boolean dateTrue = now.toLocalDate().isAfter(dateInici) && now.toLocalDate().isBefore(dateFin);
       boolean timeTrue = now.toLocalTime().isAfter(timeInici) && now.toLocalTime().isBefore(timeFin);
+      boolean actionsTrue = false;
+      for (String act : actions) {
+        if (action.equals(act)) {
+          actionsTrue = true;
+        }
+      }
 
-      if(areaTrue && daysTrue && dateTrue && timeTrue) {
+      if(areaTrue && daysTrue && dateTrue && timeTrue && actionsTrue) {
         authorized = true;
       } else {
         authorized = false;
@@ -134,6 +135,7 @@ public class RequestReader implements Request {
         else if (!daysTrue) reasons.add("User " + user.getName() + " has no access today");
         else if (!dateTrue) reasons.add("User " + user.getName() + " has no access today");
         else if (!timeTrue) reasons.add("User " + user.getName() + " has no access at " + now.toLocalTime());
+        else if (!actionsTrue) reasons.add("User " + user.getName() + " can't do " + action);
       }
       //authorized = true;
     }

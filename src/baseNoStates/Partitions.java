@@ -30,10 +30,11 @@ public class Partitions extends Area{
         doors.addAll(allAreas.get(i).getDoorsGivingAccess());
       }
     }
-
     return doors;
   }
 
   public ArrayList<Door> getDoors(){ return doors; }
+
+  public ArrayList<Area> getAreas() { return areas; }
 
 }

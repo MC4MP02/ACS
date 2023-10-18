@@ -25,8 +25,11 @@ public class Spaces extends Area {
         doors.add(allDoors.get(i));
       }
     }
+    this.doors = doors;
     return doors;
   }
 
   public ArrayList<Door> getDoors(){ return doors; }
+
+  public ArrayList<Area> getAreas() { return areas; }
 }

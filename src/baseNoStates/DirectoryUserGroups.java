@@ -12,7 +12,7 @@ public class DirectoryUserGroups {
     LocalDate dateFinEmployees = LocalDate.of(2024, 3, 1);
     LocalTime timeInicioEmployees = LocalTime.of(9,0);
     LocalTime timeFinEmployees = LocalTime.of(17,0);
-    ArrayList<String> actionsEmployees = new ArrayList<>(Arrays.asList(Actions.UNLOCK_SHORTLY));
+    ArrayList<String> actionsEmployees = new ArrayList<>(Arrays.asList(Actions.UNLOCK_SHORTLY, Actions.OPEN, Actions.CLOSE));
     ArrayList<Area> spacesEmployees = new ArrayList<>();
     spacesEmployees.add(DirectoryDoorsAndAreas.findAreaById("ground_floor"));
     spacesEmployees.add(DirectoryDoorsAndAreas.findAreaById("floor1"));
@@ -44,7 +44,7 @@ public class DirectoryUserGroups {
     LocalDate dateInicioAdmin = LocalDate.of(2023, 1, 1);
     LocalDate dateFinAdmin = LocalDate.of(2100, 1, 1);
     LocalTime timeInicioAdmin = LocalTime.of(0,0);
-    LocalTime timeFinAdmin = LocalTime.of(0,0);
+    LocalTime timeFinAdmin = LocalTime.of(23,59);
     ArrayList<String> actionsAdmin = new ArrayList<>(Arrays.asList(Actions.OPEN, Actions.CLOSE, Actions.LOCK, Actions.UNLOCK, Actions.UNLOCK_SHORTLY));
     ArrayList<Area> spacesAdmin = new ArrayList<>();
     spacesAdmin = spacesManagers;
