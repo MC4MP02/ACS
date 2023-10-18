@@ -70,6 +70,7 @@ public class Door {
   public Area getTo() {
     return to;
   }
+  public Area getFrom() { return from; }
 
   public String getStateName() {
     return state.name;

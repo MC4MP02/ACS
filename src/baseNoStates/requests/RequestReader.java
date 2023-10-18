@@ -1,10 +1,8 @@
 package baseNoStates.requests;
 
-import baseNoStates.DirectoryDoorsAndAreas;
-import baseNoStates.DirectoryUsers;
-import baseNoStates.Door;
-import baseNoStates.User;
-import java.time.LocalDateTime;
+import baseNoStates.*;
+
+import java.time.*;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -97,6 +95,28 @@ public class RequestReader implements Request {
     } else {
       //TODO: get the who, where, when and what in order to decide, and if not
       // authorized add the reason(s)
+      UserGroup userGroup = DirectoryUserGroups.findUserGroupByUser(user.getCredential());
+
+      ArrayList<Area> area = userGroup.getSpaces();
+      LocalDate dateInici = userGroup.getDateInici();
+      LocalDate dateFin = userGroup.getDateFin();
+      LocalTime timeInici = userGroup.getTimeInici();
+      LocalTime timeFin = userGroup.getTimeFin();
+      ArrayList<DayOfWeek> days = userGroup.getDays();
+      ArrayList<String> actions = userGroup.getActions();
+      ArrayList<User> users = userGroup.getUsers();
+
+      boolean areaTrue = area.contains(door.getFrom());
+      boolean daysTrue = days.contains(now.getDayOfWeek());
+      boolean dateTrue = now.toLocalDate().isAfter(dateInici) && now.toLocalDate().isBefore(dateFin);
+      boolean timeTrue = now.toLocalTime().isAfter(timeInici) && now.toLocalTime().isBefore(timeFin);
+
+      if(areaTrue && daysTrue && dateTrue && timeTrue) {
+        authorized = true;
+      } else {
+        authorized = false;
+      }
+
       authorized = true;
     }
   }
