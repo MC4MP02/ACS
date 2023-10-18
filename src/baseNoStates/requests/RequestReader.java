@@ -75,7 +75,7 @@ public class RequestReader implements Request {
   // see if the request is authorized and put this into the request, then send it to the door.
   // if authorized, perform the action.
   public void process() {
-    User user = DirectoryUsers.findUserByCredential(credential);
+    User user = DirectoryUserGroups.findUserByCredential(credential);
     Door door = DirectoryDoorsAndAreas.findDoorById(doorId);
     assert door != null : "door " + doorId + " not found";
     authorize(user, door);
@@ -106,7 +106,19 @@ public class RequestReader implements Request {
       ArrayList<String> actions = userGroup.getActions();
       ArrayList<User> users = userGroup.getUsers();
 
-      boolean areaTrue = area.contains(door.getFrom());
+      boolean areaTrue = false;
+      System.out.println(area.get(0).getId());
+      System.out.println(area.get(1).getId());
+      System.out.println(area.get(0).getDoors());
+      System.out.println(area.get(1).getDoors());
+      for (int i = 0; i < area.size(); i++) {
+        ArrayList<Door> actualAreaDoors = area.get(i).getDoors();
+        for (int j = 0; j < actualAreaDoors.size(); j++) {
+          if(door == actualAreaDoors.get(j)) {
+            areaTrue = true;
+          }
+        }
+      }
       boolean daysTrue = days.contains(now.getDayOfWeek());
       boolean dateTrue = now.toLocalDate().isAfter(dateInici) && now.toLocalDate().isBefore(dateFin);
       boolean timeTrue = now.toLocalTime().isAfter(timeInici) && now.toLocalTime().isBefore(timeFin);
@@ -117,7 +129,13 @@ public class RequestReader implements Request {
         authorized = false;
       }
 
-      authorized = true;
+      if (!authorized) {
+        if (!areaTrue) reasons.add("User " + user.getName() + " has no access to this area");
+        else if (!daysTrue) reasons.add("User " + user.getName() + " has no access today");
+        else if (!dateTrue) reasons.add("User " + user.getName() + " has no access today");
+        else if (!timeTrue) reasons.add("User " + user.getName() + " has no access at " + now.toLocalTime());
+      }
+      //authorized = true;
     }
   }
 }

@@ -34,4 +34,6 @@ public class Partitions extends Area{
     return doors;
   }
 
+  public ArrayList<Door> getDoors(){ return doors; }
+
 }

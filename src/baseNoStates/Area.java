@@ -17,6 +17,8 @@ abstract public class Area {
 
   abstract Area getFrom();
 
+  abstract public ArrayList<Door> getDoors();
+
   abstract public ArrayList<Door> getDoorsGivingAccess();
 }
 

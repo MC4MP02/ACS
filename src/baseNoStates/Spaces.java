@@ -27,4 +27,6 @@ public class Spaces extends Area {
     }
     return doors;
   }
+
+  public ArrayList<Door> getDoors(){ return doors; }
 }

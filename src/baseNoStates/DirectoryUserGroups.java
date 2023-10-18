@@ -8,10 +8,6 @@ public class DirectoryUserGroups {
   private static ArrayList<UserGroup> userGroups;
 
   public static void makeUserGroup() {
-    //Con DayOfWeek se puede mirar si el dia es SATURDAY haciendo:
-    //inicio.getDayOfWeek() != DayOfWeek.SUNDAY
-
-
     LocalDate dateInicioEmployees = LocalDate.of(2023, 9, 1);
     LocalDate dateFinEmployees = LocalDate.of(2024, 3, 1);
     LocalTime timeInicioEmployees = LocalTime.of(9,0);
@@ -29,7 +25,6 @@ public class DirectoryUserGroups {
     employees.addUsers(new User("Eulalia", "43295"));
 
 
-    //inicio.getDayOfWeek() != DayOfWeek.SATURDAY && inicio.getDayOfWeek() != DayOfWeek.SUNDAY
     LocalDate dateInicioManagers = LocalDate.of(2023, 9, 1);
     LocalDate dateFinManagers = LocalDate.of(2024, 3, 1);
     LocalTime timeInicioManagers = LocalTime.of(8,0);
@@ -59,15 +54,18 @@ public class DirectoryUserGroups {
     UserGroup admin = new UserGroup(dateInicioAdmin, dateFinAdmin, daysAdmin,timeInicioAdmin, timeFinAdmin, actionsAdmin, spacesManagers);
     admin.addUsers(new User("Ana", "11343"));
 
-
-    UserGroup user = new UserGroup(null, null, null, null, null, null, null);
+    LocalDate dateInicioUser = LocalDate.of(1, 1, 1);
+    LocalDate dateFinUser = LocalDate.of(1, 1, 1);
+    LocalTime timeInicioUser = LocalTime.of(0,0);
+    LocalTime timeFinUser = LocalTime.of(0,0);
+    UserGroup user = new UserGroup(dateInicioUser, dateFinUser, new ArrayList<>(), timeInicioUser, timeFinUser, new ArrayList<>(), new ArrayList<>());
     user.addUsers(new User("Bernat", "12345"));
     user.addUsers(new User("Blai", "77532"));
 
     userGroups = new ArrayList<>(Arrays.asList(user, admin, employees, managers));
   }
 
-  public User findUserByCredential(String credential) {
+  public static User findUserByCredential(String credential) {
     for (UserGroup userGroup: userGroups) {
       for (User user : userGroup.getUsers()) {
         if (user.getCredential().equals(credential)) {
@@ -76,7 +74,7 @@ public class DirectoryUserGroups {
       }
     }
     System.out.println("user with credential " + credential + " not found");
-    return null; // otherwise we get a Java error
+    return null;
   }
 
   public static UserGroup findUserGroupByUser(String credential) {
@@ -88,7 +86,6 @@ public class DirectoryUserGroups {
       }
     }
     System.out.println("user with credential " + credential + " not found");
-    return null; // otherwise we get a Java error
+    return null;
   }
-
 }
