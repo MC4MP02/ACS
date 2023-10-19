@@ -12,6 +12,7 @@ public class User {
   public String getCredential() {
     return credential;
   }
+  public String getName() { return name; }
 
   @Override
   public String toString() {

@@ -6,11 +6,15 @@ import org.json.JSONObject;
 
 public class Door {
   private final String id;
+  private final Area from;
+  private final Area to;
   private boolean closed;
   public DoorState state;
 
-  public Door(String id) {
+  public Door(String id, Area from, Area to) {
     this.id = id;
+    this.from = from;
+    this.to = to;
     closed = true;
     state = new Unlocked(this);
   }
@@ -63,6 +67,10 @@ public class Door {
   public String getId() {
     return id;
   }
+  public Area getTo() {
+    return to;
+  }
+  public Area getFrom() { return from; }
 
   public String getStateName() {
     return state.name;

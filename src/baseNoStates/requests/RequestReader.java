@@ -1,12 +1,11 @@
 package baseNoStates.requests;
 
-import baseNoStates.DirectoryDoors;
-import baseNoStates.DirectoryUsers;
-import baseNoStates.Door;
-import baseNoStates.User;
-import java.time.LocalDateTime;
+import baseNoStates.*;
+
+import java.time.*;
 import java.util.ArrayList;
 
+import com.sun.source.tree.DirectiveTree;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -77,8 +76,8 @@ public class RequestReader implements Request {
   // see if the request is authorized and put this into the request, then send it to the door.
   // if authorized, perform the action.
   public void process() {
-    User user = DirectoryUsers.findUserByCredential(credential);
-    Door door = DirectoryDoors.findDoorById(doorId);
+    User user = DirectoryUserGroups.findUserByCredential(credential);
+    Door door = DirectoryDoorsAndAreas.findDoorById(doorId);
     assert door != null : "door " + doorId + " not found";
     authorize(user, door);
     // this sets the boolean authorize attribute of the request
@@ -97,7 +96,52 @@ public class RequestReader implements Request {
     } else {
       //TODO: get the who, where, when and what in order to decide, and if not
       // authorized add the reason(s)
-      authorized = true;
+      UserGroup userGroup = DirectoryUserGroups.findUserGroupByUser(user.getCredential());
+
+      ArrayList<Area> area = userGroup.getAreas();
+      LocalDate dateInici = userGroup.getSchedule().getDateInici();
+      LocalDate dateFin = userGroup.getSchedule().getDateFin();
+      LocalTime timeInici = userGroup.getSchedule().getTimeInici();
+      LocalTime timeFin = userGroup.getSchedule().getTimeFin();
+      ArrayList<DayOfWeek> days = userGroup.getSchedule().getDays();
+      ArrayList<String> actions = userGroup.getActions();
+      ArrayList<User> users = userGroup.getUsers();
+
+      boolean areaTrue = false;
+      if (area.get(0).getId().equals("building")) {
+        areaTrue = true;
+      } else {
+        for (Area areas : area) {
+          if (door.getTo().getFrom() == areas || door.getTo() == areas) {
+            areaTrue = true;
+          }
+        }
+      }
+
+      boolean daysTrue = days.contains(now.getDayOfWeek());
+      boolean dateTrue = now.toLocalDate().isAfter(dateInici) && now.toLocalDate().isBefore(dateFin);
+      boolean timeTrue = now.toLocalTime().isAfter(timeInici) && now.toLocalTime().isBefore(timeFin);
+      boolean actionsTrue = false;
+      for (String act : actions) {
+        if (action.equals(act)) {
+          actionsTrue = true;
+        }
+      }
+
+      if(areaTrue && daysTrue && dateTrue && timeTrue && actionsTrue) {
+        authorized = true;
+      } else {
+        authorized = false;
+      }
+
+      if (!authorized) {
+        if (!areaTrue) reasons.add("User " + user.getName() + " has no access to this area");
+        else if (!daysTrue) reasons.add("User " + user.getName() + " has no access today");
+        else if (!dateTrue) reasons.add("User " + user.getName() + " has no access today");
+        else if (!timeTrue) reasons.add("User " + user.getName() + " has no access at " + now.toLocalTime());
+        else if (!actionsTrue) reasons.add("User " + user.getName() + " can't do " + action);
+      }
+      //authorized = true;
     }
   }
 }

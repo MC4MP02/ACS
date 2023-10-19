@@ -4,15 +4,23 @@ import baseNoStates.requests.RequestArea;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Area {
-  private final String id;
-  private List<Door> doors;
+abstract public class Area {
+  protected final String id;
+  protected ArrayList<Door> doors;
 
   public Area(String id) {
+    this.doors = new ArrayList<Door>();
     this.id = id;
   }
 
   public String getId() { return id; }
 
-  //public List<Door> getDoorsGivingAccess() { }
+  abstract public Area getFrom();
+
+  abstract public ArrayList<Door> getDoors();
+
+  abstract public ArrayList<Door> getDoorsGivingAccess();
+
+  abstract public ArrayList<Area> getAreas();
 }
+

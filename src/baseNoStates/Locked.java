@@ -38,7 +38,12 @@ public class Locked extends DoorState {
       timer.schedule(new TimerTask() {
         @Override
         public void run() {
-          door.setState(new Locked(door));
+          if(door.isClosed()) {
+            door.setState(new Locked(door));
+          }
+          else {
+            door.setState(new Propped(door));
+          }
         }
       }, 10000);
     }
