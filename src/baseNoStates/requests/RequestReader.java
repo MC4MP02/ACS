@@ -98,19 +98,23 @@ public class RequestReader implements Request {
       // authorized add the reason(s)
       UserGroup userGroup = DirectoryUserGroups.findUserGroupByUser(user.getCredential());
 
-      ArrayList<Area> area = userGroup.getSpaces();
-      LocalDate dateInici = userGroup.getDateInici();
-      LocalDate dateFin = userGroup.getDateFin();
-      LocalTime timeInici = userGroup.getTimeInici();
-      LocalTime timeFin = userGroup.getTimeFin();
-      ArrayList<DayOfWeek> days = userGroup.getDays();
+      ArrayList<Area> area = userGroup.getAreas();
+      LocalDate dateInici = userGroup.getSchedule().getDateInici();
+      LocalDate dateFin = userGroup.getSchedule().getDateFin();
+      LocalTime timeInici = userGroup.getSchedule().getTimeInici();
+      LocalTime timeFin = userGroup.getSchedule().getTimeFin();
+      ArrayList<DayOfWeek> days = userGroup.getSchedule().getDays();
       ArrayList<String> actions = userGroup.getActions();
       ArrayList<User> users = userGroup.getUsers();
 
       boolean areaTrue = false;
-      for (Area areas : area) {
-        if (door.getTo().getFrom() == areas || door.getTo() == areas) {
-          areaTrue = true;
+      if (area.get(0).getId().equals("building")) {
+        areaTrue = true;
+      } else {
+        for (Area areas : area) {
+          if (door.getTo().getFrom() == areas || door.getTo() == areas) {
+            areaTrue = true;
+          }
         }
       }
 
