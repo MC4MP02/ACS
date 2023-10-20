@@ -30,23 +30,22 @@ public class DirectoryUserGroups {
     LocalDate dateFinManagers = LocalDate.of(2024, 3, 1);
     LocalTime timeInicioManagers = LocalTime.of(8,0);
     LocalTime timeFinManagers= LocalTime.of(20,0);
-    ArrayList<DayOfWeek> daysManagers = daysEmployees;
-    daysManagers.add(DayOfWeek.SATURDAY);
+    ArrayList<DayOfWeek> daysManagers = new ArrayList<>(Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY));
     Schedule scheduleManagers = new Schedule(dateInicioManagers, dateFinManagers, daysManagers, timeInicioManagers, timeFinManagers);
 
     ArrayList<String> actionsManagers = new ArrayList<>(Arrays.asList(Actions.OPEN, Actions.CLOSE, Actions.LOCK, Actions.UNLOCK, Actions.UNLOCK_SHORTLY));
     ArrayList<Area> spacesManagers = new ArrayList<>(Arrays.asList(DirectoryDoorsAndAreas.findAreaById("building")));
     ArrayList<User> usersManagers = new ArrayList<>(Arrays.asList(new User("Manel", "95783"), new User("Marta", "05827")));
 
-    UserGroup managers = new UserGroup("managers", scheduleManagers, actionsManagers, usersManagers,spacesManagers);
+    UserGroup managers = new UserGroup("managers", scheduleManagers, actionsManagers, usersManagers, spacesManagers);
 
 
     LocalDate dateInicioAdmin = LocalDate.of(2023, 1, 1);
     LocalDate dateFinAdmin = LocalDate.of(2100, 1, 1);
     LocalTime timeInicioAdmin = LocalTime.of(0,0);
     LocalTime timeFinAdmin = LocalTime.of(23,59);
-    ArrayList<DayOfWeek> daysAdmin = daysManagers;
-    daysAdmin.add(DayOfWeek.SUNDAY);
+    ArrayList<DayOfWeek> daysAdmin = new ArrayList<>(Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY, DayOfWeek.SUNDAY));
+
     Schedule scheduleAdmin = new Schedule(dateInicioAdmin, dateFinAdmin, daysAdmin, timeInicioAdmin, timeFinAdmin);
 
     ArrayList<String> actionsAdmin = new ArrayList<>(Arrays.asList(Actions.OPEN, Actions.CLOSE, Actions.LOCK, Actions.UNLOCK, Actions.UNLOCK_SHORTLY));

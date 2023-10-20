@@ -117,7 +117,6 @@ public class RequestReader implements Request {
           }
         }
       }
-
       boolean daysTrue = days.contains(now.getDayOfWeek());
       boolean dateTrue = now.toLocalDate().isAfter(dateInici) && now.toLocalDate().isBefore(dateFin);
       boolean timeTrue = now.toLocalTime().isAfter(timeInici) && now.toLocalTime().isBefore(timeFin);
