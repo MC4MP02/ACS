@@ -14,13 +14,13 @@ abstract public class Area {
     this.id = id;
   }
 
-  public String getId() {
-    return id;
-  } // getter of area's id
+  abstract public String getId(); // getter of area's id
 
   abstract public Area getFrom(); // getter from the object's parent area
 
   abstract public ArrayList<Door> getDoors(); // getter of the array of doors of the area
 
   abstract public ArrayList<Door> getDoorsGivingAccess(); // getter of the doors that the object area has access to
+
+  abstract public Area findAreaById(String id);
 }

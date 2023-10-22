@@ -8,6 +8,8 @@ public final class DirectoryDoorsAndAreas {
   private static ArrayList<Door> allDoors; // array to safe all the doors and be able to search for them
   private static ArrayList<Area> allAreas; // array to safe all the areas and be able to search for them
 
+  private static Area root;
+
   // function to intialize all the areas and doors
   public static void makeDoorsAndAreas() {
     // Partitions:
@@ -20,6 +22,7 @@ public final class DirectoryDoorsAndAreas {
 
     // Every Space/Partition have the "id" (to identify) and "fromSpace" (to know
     // who is the parent Area)
+
     Partitions building = new Partitions("building", null);
     Partitions basement = new Partitions("basement", building);
     Partitions ground_floor = new Partitions("ground_floor", building);
@@ -34,8 +37,18 @@ public final class DirectoryDoorsAndAreas {
     Spaces IT = new Spaces("IT", floor1);
     Spaces exterior = new Spaces("exterior", building);
 
-    allAreas = new ArrayList<>(Arrays.asList(basement, ground_floor, floor1, parking, stairs, room1, room2, room3, hall,
-        corridor, IT, building, exterior)); // initilize the allAreas
+    building.addChilds(new ArrayList<>(Arrays.asList(basement, ground_floor, floor1, exterior, stairs)));
+
+    basement.addChilds(new ArrayList<>(Arrays.asList(parking)));
+
+    ground_floor.addChilds(new ArrayList<>(Arrays.asList(room1, room2, hall)));
+
+    floor1.addChilds(new ArrayList<>(Arrays.asList(corridor, IT)));
+
+    allAreas = new ArrayList<>(Arrays.asList(building, ground_floor, floor1, parking, stairs, room1, room2, room3, hall,
+        corridor, IT, basement, exterior)); // initilize the allAreas
+
+    root = building;
 
     // basement
     Door d1 = new Door("D1", exterior, parking); // exterior, parking
@@ -70,13 +83,7 @@ public final class DirectoryDoorsAndAreas {
   // function for search in all the areas by the id
   // return: area that matches the id
   public static Area findAreaById(String id) {
-    for (Area area : allAreas) {
-      if (area.getId().equals(id)) {
-        return area;
-      }
-    }
-    System.out.println("area with id " + id + " not found");
-    return null; // otherwise we get a Java error
+    return root.findAreaById(id);
   }
 
   // this is needed by RequestRefresh

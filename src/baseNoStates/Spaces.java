@@ -4,14 +4,12 @@ import java.util.ArrayList;
 
 //spaces class, a space can have one or more doors, it's a closed site by doors.
 public class Spaces extends Area {
-  public ArrayList<Area> areas;
   private Area from;
 
   // spaces constructor, id, area and partition assignments.
 
-  public Spaces(String id, ArrayList<Area> areas, Partitions from) {
+  public Spaces(String id, Area from) {
     super(id);
-    this.areas = areas;
     this.from = from;
   }
 
@@ -40,7 +38,21 @@ public class Spaces extends Area {
   }
 
   // doors attribute getter
+  @Override
   public ArrayList<Door> getDoors() {
     return doors;
+  }
+
+  @Override
+  public Area findAreaById(String id) {
+    if (this.id.equals(id)) {
+      return this;
+    }
+    return null;
+  }
+
+  @Override
+  public String getId() {
+    return id;
   }
 }

@@ -98,36 +98,26 @@ public class RequestReader implements Request {
       // authorized add the reason(s)
       UserGroup userGroup = DirectoryUserGroups.findUserGroupByUser(user.getCredential());
 
-      ArrayList<Area> area = userGroup.getAreas();
-      LocalDate dateInici = userGroup.getSchedule().getDateInici();
-      LocalDate dateFin = userGroup.getSchedule().getDateFin();
-      LocalTime timeInici = userGroup.getSchedule().getTimeInici();
-      LocalTime timeFin = userGroup.getSchedule().getTimeFin();
-      ArrayList<DayOfWeek> days = userGroup.getSchedule().getDays();
+      ArrayList<Area> areas = userGroup.getAreas();
       ArrayList<String> actions = userGroup.getActions();
       ArrayList<User> users = userGroup.getUsers();
 
       boolean areaTrue = false;
-      if (area.get(0).getId().equals("building")) {
+      if (area.size() == 1 && area.get(0).getId().equals("building")) {
         areaTrue = true;
       } else {
-        for (Area areas : area) {
-          if (door.getTo().getFrom() == areas || door.getTo() == areas) {
+        for (Area area : areas) {
+          if (door.getTo().getFrom() == area || door.getTo() == area) {
             areaTrue = true;
           }
         }
       }
-      boolean daysTrue = days.contains(now.getDayOfWeek());
-      boolean dateTrue = now.toLocalDate().isAfter(dateInici) && now.toLocalDate().isBefore(dateFin);
-      boolean timeTrue = now.toLocalTime().isAfter(timeInici) && now.toLocalTime().isBefore(timeFin);
-      boolean actionsTrue = false;
-      for (String act : actions) {
-        if (action.equals(act)) {
-          actionsTrue = true;
-        }
-      }
 
-      if(areaTrue && daysTrue && dateTrue && timeTrue && actionsTrue) {
+      boolean isSchedule = userGroup.getSchedule().isSchedule(now);
+
+      boolean actionsTrue = actions.contains(action);
+
+      if(areaTrue && isSchedule && actionsTrue) {
         authorized = true;
       } else {
         authorized = false;
@@ -135,9 +125,7 @@ public class RequestReader implements Request {
 
       if (!authorized) {
         if (!areaTrue) reasons.add("User " + user.getName() + " has no access to this area");
-        else if (!daysTrue) reasons.add("User " + user.getName() + " has no access today");
-        else if (!dateTrue) reasons.add("User " + user.getName() + " has no access today");
-        else if (!timeTrue) reasons.add("User " + user.getName() + " has no access at " + now.toLocalTime());
+        else if (!isSchedule) reasons.add("User " + user.getName() + " has no access in this schedule");
         else if (!actionsTrue) reasons.add("User " + user.getName() + " can't do " + action);
       }
       //authorized = true;

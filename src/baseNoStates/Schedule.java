@@ -23,6 +23,14 @@ public class Schedule {
 
     // all getters
 
+    public boolean isSchedule(LocalDateTime now) {
+        boolean daysTrue = days.contains(now.getDayOfWeek());
+        boolean dateTrue = now.toLocalDate().isAfter(dateInici) && now.toLocalDate().isBefore(dateFin);
+        boolean timeTrue = now.toLocalTime().isAfter(timeInici) && now.toLocalTime().isBefore(timeFin);
+
+        return daysTrue && dateTrue && timeTrue;
+    }
+
     public LocalDate getDateInici() {
         return dateInici;
     }
