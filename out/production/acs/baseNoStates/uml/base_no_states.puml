@@ -25,21 +25,6 @@ inner class
 of Webserver
 end note
 
-class DirectoryDoors {
-- {static} allDoors : Door[]
-+ {static} makeDoors()
-+ {static} findDoorById(id : String) : Door
-+ {static} getAllDoors() : Door[]
-}
-
-DirectoryDoors --> "*" Door : "allDoors"
-
-class DirectoryUsers {
-- {static} users : User[]
-+ {static} makeUsers()
-+ {static} findUserByCredential(credential : String) : User
-}
-
 class DirectoryUserGroups {
 - {static} userGroups : UserGroups[]
 + {static} makeUserGroup()
@@ -74,13 +59,13 @@ class Door {
 + processRequest(request : RequestReader)
 + setState(doorState : DoorState)
 + toJson() : JSONObject
-'+ toString() : String
-'+ isClosed() :boolean
-'+ setClosed(b : boolean)
-'+ getStateName() : String
-'+ getId() : String
-'+ getTo() : Area
-'+ getFrom() : Area
++ toString() : String
++ isClosed() :boolean
++ setClosed(b : boolean)
++ getStateName() : String
++ getId() : String
++ getTo() : Area
++ getFrom() : Area
 - doAction(action : String)
 }
 
@@ -93,8 +78,8 @@ abstract class DoorState{
 + lock()
 + unlock()
 + unlockShortly()
-'+ setName(name : String)
-'+ getName() : String
++ setName(name : String)
++ getName() : String
 }
 
 class Unlocked extends DoorState {

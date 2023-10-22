@@ -3,7 +3,7 @@ package baseNoStates;
 import baseNoStates.requests.RequestReader;
 import org.json.JSONObject;
 
-
+// Doors class, we have on it the declaration
 public class Door {
   private final String id;
   private final Area from;

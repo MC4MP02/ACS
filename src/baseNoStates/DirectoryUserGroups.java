@@ -4,15 +4,19 @@ import java.time.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+//class to create the users and the groups of users
 public class DirectoryUserGroups {
-  private static ArrayList<UserGroup> userGroups;
+  private static ArrayList<UserGroup> userGroups; //array of all the groups for search them
 
+  //function to intialize all the users and groups of users
   public static void makeUserGroup() {
-    LocalDate dateInicioEmployees = LocalDate.of(2023, 9, 1);
-    LocalDate dateFinEmployees = LocalDate.of(2024, 3, 1);
-    LocalTime timeInicioEmployees = LocalTime.of(9,0);
-    LocalTime timeFinEmployees = LocalTime.of(17,0);
+    LocalDate dateInicioEmployees = LocalDate.of(2023, 9, 1); //start date in format LocalDate
+    LocalDate dateFinEmployees = LocalDate.of(2024, 3, 1); //end date in format LocalDate
+    LocalTime timeInicioEmployees = LocalTime.of(9,0); //start time in format LocalTime
+    LocalTime timeFinEmployees = LocalTime.of(17,0); //end time in format LocalTime
+    //array of all the days in format DayOfWeek that the group have access
     ArrayList<DayOfWeek> daysEmployees = new ArrayList<>(Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY));
+    //initialize a object of Schedule
     Schedule scheduleEmployees = new Schedule(dateInicioEmployees, dateFinEmployees, daysEmployees, timeInicioEmployees, timeFinEmployees);
 
     ArrayList<String> actionsEmployees = new ArrayList<>(Arrays.asList(Actions.UNLOCK_SHORTLY, Actions.OPEN, Actions.CLOSE));
