@@ -3,14 +3,17 @@ package baseNoStates;
 import java.time.*;
 import java.util.ArrayList;
 
+// schedule class that has times and days, we need the class for the most time aspects 
 public class Schedule {
-    private final LocalDate dateInici;
-    private final LocalDate dateFin;
-    private final LocalTime timeInici;
-    private final LocalTime timeFin;
-    private final ArrayList<DayOfWeek> days;
+    private LocalDate dateInici;
+    private LocalDate dateFin;
+    private LocalTime timeInici;
+    private LocalTime timeFin;
+    private ArrayList<DayOfWeek> days;
 
-    public Schedule(LocalDate dateInici, LocalDate dateFin, ArrayList<DayOfWeek> days, LocalTime timeInici, LocalTime timeFin) {
+    // class constructor with all class atributes
+    public Schedule(LocalDate dateInici, LocalDate dateFin, ArrayList<DayOfWeek> days, LocalTime timeInici,
+            LocalTime timeFin) {
         this.dateInici = dateInici;
         this.dateFin = dateFin;
         this.days = days;
@@ -18,13 +21,33 @@ public class Schedule {
         this.timeFin = timeFin;
     }
 
-    public LocalDate getDateInici() { return dateInici; }
+    // all getters
 
-    public LocalDate getDateFin() { return dateFin; }
+    public boolean isSchedule(LocalDateTime now) {
+        boolean daysTrue = days.contains(now.getDayOfWeek());
+        boolean dateTrue = now.toLocalDate().isAfter(dateInici) && now.toLocalDate().isBefore(dateFin);
+        boolean timeTrue = now.toLocalTime().isAfter(timeInici) && now.toLocalTime().isBefore(timeFin);
 
-    public LocalTime getTimeInici() { return timeInici; }
+        return daysTrue && dateTrue && timeTrue;
+    }
 
-    public LocalTime getTimeFin() { return timeFin; }
+    public LocalDate getDateInici() {
+        return dateInici;
+    }
 
-    public ArrayList<DayOfWeek> getDays() { return days; }
+    public LocalDate getDateFin() {
+        return dateFin;
+    }
+
+    public LocalTime getTimeInici() {
+        return timeInici;
+    }
+
+    public LocalTime getTimeFin() {
+        return timeFin;
+    }
+
+    public ArrayList<DayOfWeek> getDays() {
+        return days;
+    }
 }

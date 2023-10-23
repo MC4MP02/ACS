@@ -1,5 +1,7 @@
 package baseNoStates;
 
+
+//abstract class that indicates the different states of a door
 abstract public class DoorState{
   protected Door door;
   protected String name;
@@ -9,17 +11,19 @@ abstract public class DoorState{
     this.name = States.UNLOCKED;
   }
 
-  public void open() {}
+  public void open() {} //the door is open
 
-  public void close() {}
+  public void close() {} //the door is closed
 
-  public void lock() {}
+  public void lock() {} //the door is locked
 
-  public void unlock() {}
+  public void unlock() {} //the door is unlocked
 
-  public void unlock_shorty() {}
+  public void unlock_shorty() {} //the door is unlocked for 10 seconds
+
+  //return name of the door
   public String getName() {
     return name;
   }
-  public void setName(String name) { this.name = name; }
+  public void setName(String name) { this.name = name; } //used to assign a name to a door
 }

@@ -1,5 +1,6 @@
 package baseNoStates;
 
+
 public class UnlockedShortly extends DoorState {
   public UnlockedShortly(Door door) {
     super(door);

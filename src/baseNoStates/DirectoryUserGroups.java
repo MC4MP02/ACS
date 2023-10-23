@@ -4,15 +4,19 @@ import java.time.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+//class to create the users and the groups of users
 public class DirectoryUserGroups {
-  private static ArrayList<UserGroup> userGroups;
+  private static ArrayList<UserGroup> userGroups; //array of all the groups for search them
 
+  //function to intialize all the users and groups of users
   public static void makeUserGroup() {
-    LocalDate dateInicioEmployees = LocalDate.of(2023, 9, 1);
-    LocalDate dateFinEmployees = LocalDate.of(2024, 3, 1);
-    LocalTime timeInicioEmployees = LocalTime.of(9,0);
-    LocalTime timeFinEmployees = LocalTime.of(17,0);
+    LocalDate dateInicioEmployees = LocalDate.of(2023, 9, 1); //start date in format LocalDate
+    LocalDate dateFinEmployees = LocalDate.of(2024, 3, 1); //end date in format LocalDate
+    LocalTime timeInicioEmployees = LocalTime.of(9,0); //start time in format LocalTime
+    LocalTime timeFinEmployees = LocalTime.of(17,0); //end time in format LocalTime
+    //array of all the days in format DayOfWeek that the group have access
     ArrayList<DayOfWeek> daysEmployees = new ArrayList<>(Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY));
+    //initialize a object of Schedule
     Schedule scheduleEmployees = new Schedule(dateInicioEmployees, dateFinEmployees, daysEmployees, timeInicioEmployees, timeFinEmployees);
 
     ArrayList<String> actionsEmployees = new ArrayList<>(Arrays.asList(Actions.UNLOCK_SHORTLY, Actions.OPEN, Actions.CLOSE));
@@ -30,23 +34,22 @@ public class DirectoryUserGroups {
     LocalDate dateFinManagers = LocalDate.of(2024, 3, 1);
     LocalTime timeInicioManagers = LocalTime.of(8,0);
     LocalTime timeFinManagers= LocalTime.of(20,0);
-    ArrayList<DayOfWeek> daysManagers = daysEmployees;
-    daysManagers.add(DayOfWeek.SATURDAY);
+    ArrayList<DayOfWeek> daysManagers = new ArrayList<>(Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY));
     Schedule scheduleManagers = new Schedule(dateInicioManagers, dateFinManagers, daysManagers, timeInicioManagers, timeFinManagers);
 
     ArrayList<String> actionsManagers = new ArrayList<>(Arrays.asList(Actions.OPEN, Actions.CLOSE, Actions.LOCK, Actions.UNLOCK, Actions.UNLOCK_SHORTLY));
     ArrayList<Area> spacesManagers = new ArrayList<>(Arrays.asList(DirectoryDoorsAndAreas.findAreaById("building")));
     ArrayList<User> usersManagers = new ArrayList<>(Arrays.asList(new User("Manel", "95783"), new User("Marta", "05827")));
 
-    UserGroup managers = new UserGroup("managers", scheduleManagers, actionsManagers, usersManagers,spacesManagers);
+    UserGroup managers = new UserGroup("managers", scheduleManagers, actionsManagers, usersManagers, spacesManagers);
 
 
     LocalDate dateInicioAdmin = LocalDate.of(2023, 1, 1);
     LocalDate dateFinAdmin = LocalDate.of(2100, 1, 1);
     LocalTime timeInicioAdmin = LocalTime.of(0,0);
     LocalTime timeFinAdmin = LocalTime.of(23,59);
-    ArrayList<DayOfWeek> daysAdmin = daysManagers;
-    daysAdmin.add(DayOfWeek.SUNDAY);
+    ArrayList<DayOfWeek> daysAdmin = new ArrayList<>(Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY, DayOfWeek.SUNDAY));
+
     Schedule scheduleAdmin = new Schedule(dateInicioAdmin, dateFinAdmin, daysAdmin, timeInicioAdmin, timeFinAdmin);
 
     ArrayList<String> actionsAdmin = new ArrayList<>(Arrays.asList(Actions.OPEN, Actions.CLOSE, Actions.LOCK, Actions.UNLOCK, Actions.UNLOCK_SHORTLY));

@@ -25,6 +25,7 @@ package requests {
     - authorized : boolean
     - reasons : String[]
     - doorStateName : String
+    - doorClosed : boolean
     + answerToJson() : JSONObject
     + process()
     - authorize(user : User, door : Door)
@@ -32,6 +33,7 @@ package requests {
     + setDoorStateName(name : String)
     + getAction() : String
     + isAuthorized() : boolean
+    + addReason(reason : String)
     }
 
     class RequestArea implements Request {
@@ -43,7 +45,7 @@ package requests {
     + answerToJson() : JSONObject
     + process()
     + getAction() : String
-    }
+ }
 }
 
 

@@ -25,35 +25,47 @@ inner class
 of Webserver
 end note
 
-class DirectoryDoors {
-- {static} allDoors : Door[]
-+ {static} makeDoors()
-+ {static} findDoorById(id : String) : Door
-+ {static} getAllDoors() : Door[]
-}
-
-DirectoryDoors --> "*" Door : "allDoors"
-
-class DirectoryUsers {
-- {static} users : User[]
-+ {static} makeUsers()
+class DirectoryUserGroups {
+- {static} userGroups : UserGroups[]
++ {static} makeUserGroup()
 + {static} findUserByCredential(credential : String) : User
++ {static} findUserGroupByUser(credential : String) : UserGroup
 }
 
+class UserGroup {
+- id : String
+- actions : String[]
+- users : User[]
+- areas : Area[]
++ UserGroup(id : String, schedule : Schedule,actions : String[],users : User[], areas : Area[])
++ addUsers(user : User)
++ getUsers() : User[]
++ getAreas() : Area[]
++ getActions() : String[]
++ getSchedule() : Schedule
+
+}
+DirectoryUserGroups --> "*" UserGroup : "userGroups"
 DirectoryUsers --> "*" User : "users"
+Schedule --> "*" UserGroup : schedule
 
 class Door {
 - id : String
+- from : Area
+- to : Area
 - closed : boolean
 + state : DoorState
 + Door(id : String)
 + processRequest(request : RequestReader)
 + setState(doorState : DoorState)
 + toJson() : JSONObject
-'+ toString() : String
-'+ isClosed() :boolean
-'+ setClosed(b : boolean)
-'+ getStateName() : String
++ toString() : String
++ isClosed() :boolean
++ setClosed(b : boolean)
++ getStateName() : String
++ getId() : String
++ getTo() : Area
++ getFrom() : Area
 - doAction(action : String)
 }
 
@@ -66,8 +78,8 @@ abstract class DoorState{
 + lock()
 + unlock()
 + unlockShortly()
-'+ setName(name : String)
-'+ getName() : String
++ setName(name : String)
++ getName() : String
 }
 
 class Unlocked extends DoorState {
@@ -106,6 +118,7 @@ class States {
 + {static} LOCKED : String
 + {static} UNLOCKED : String
 + {static} UNLOCKED_SHORTLY: String
++ {static} PROPPED: String
 }
 
 class Actions {
@@ -121,26 +134,90 @@ class User {
 - credential : String
 + User(name: String, credential: String)
 + toString() : String
++ getCredential() : String
++ getName() : String
 }
 
 
 class Area {
 - id : String
-- door : List<Door>
+- doors : List<Door>
 + Area(id : String)
-'+ getId() : String
++ getId() : String
++ {abstract} getFrom() : Area
++ {abstract} getDoors() : Door[]
++ {abstract} getDoorsGivingAccess() : Door[]
++ {abstract} getAreas() : Area[]
++ {abstract} findAreaById(id : String) : Area
 }
 
+class Partitions extends Area {
++ areas : Area[]
++ from: Area
++ Partitions(id : String, areas : Area[], from : Partitions)
++ getFrom() : Area
++ addAreas(area: Area)
++ getDoorsGivingAccess() : Door[]
++ getDoors() : Door[]
++ getAreas() : Area[]
++ findAreaById(id : String) : Area
+}
 
+class Propped extends DoorState {
++ Propped(door : Door)
++ open()
++ close()
++ lock()
++ unlock()
+}
+
+class Schedule {
+- dateInici : LocalDate
+- dateFin : LocalDate
+- timeInici : LocalDate
+- timeFin : LocalDate
+- days : DayOfWeek[]
++ Schedule(dateInici : LocalDate, dateFin : LocalDate, days : DayOfWeek[], timeInici : LocalDate, timeFin : LocalDate)
++ getDateInici() : LocalDate
++ getDateFin() : LocalDate
++ getTimeInici() : LocalDate
++ getTimeFin() : LocalDate
++ getDays : DayOfWeek[]
+}
+
+class Spaces extends Area {
++ areas : Area[]
++ from: Area
++ Spaces(id : String, area : Area[], from : Partitions)
++  getFrom() : Area
++ addAreas(area: Area)
++ getDoorsGivingAccess() : Door[]
++ getDoors() : Door[]
++ getAreas() : Area[]
++ findAreaById(id : String) : Area
+}
 
 class DirectoryAreas {
 - {static} allAreas : Area[]
-+ {static} makeAreas()
+- rootArea : Area
 + {static} findAreaById(id : String) : Area
 + {static} getAllAreas() : Area[]
 }
 
 DirectoryAreas --> "*" Area : "allAreas"
+
+class DirectoryDoorsAndAreas {
+- {static} allAreas : Area[]
+- {static} allDoors : Door[]
+- {static} root : Area
++ {static} makeDoorsAndAreas()
++ {static} findAreaById(id : String) : Area
++ {static} findDoorById(id : String) : Door
++ {static} getAllAreas() : Area[]
++ {static} getAllDoors() : Door[]
+}
+DirectoryDoorsAndAreas --> "*" Area : "allAreas"
+DirectoryDoorsAndAreas --> "*" Door : "allDoors"
 
 
 class Main {
@@ -153,6 +230,8 @@ DiretoryUsers.makeUsers()
 new Webserver()
 end note
 
+DirectoryUserGroups -[hidden]down- Schedule
+DirectoryDoorsAndAreas -[hidden]left- Door
 DirectoryAreas -[hidden]right- Area
 Area -[hidden]up- User
 Main -[hidden]down- Webserver
