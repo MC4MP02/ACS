@@ -7,7 +7,6 @@ import java.util.Arrays;
 public final class DirectoryDoorsAndAreas {
   private static ArrayList<Door> allDoors; // array to safe all the doors and be able to search for them
   private static ArrayList<Area> allAreas; // array to safe all the areas and be able to search for them
-
   private static Area root;
 
   // function to intialize all the areas and doors
