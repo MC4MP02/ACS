@@ -21,8 +21,10 @@ public class Schedule {
         this.timeFin = timeFin;
     }
 
-    // all getters
 
+    //we use this function to know if we are between correct hours to confirm that
+    //we are in the correct schedule, we use that for the user's schedules.
+    //returns a boolean.
     public boolean isSchedule(LocalDateTime now) {
         boolean daysTrue = days.contains(now.getDayOfWeek());
         boolean dateTrue = now.toLocalDate().isAfter(dateInici) && now.toLocalDate().isBefore(dateFin);
@@ -30,7 +32,7 @@ public class Schedule {
 
         return daysTrue && dateTrue && timeTrue;
     }
-
+    // all getters
     public LocalDate getDateInici() {
         return dateInici;
     }

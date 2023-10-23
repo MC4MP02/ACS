@@ -71,7 +71,8 @@ public class DirectoryUserGroups {
 
     userGroups = new ArrayList<>(Arrays.asList(user, admin, employees, managers));
   }
-
+  //we search a concrete user by his credential
+  //returns a User object if it finds it
   public static User findUserByCredential(String credential) {
     for (UserGroup userGroup: userGroups) {
       for (User user : userGroup.getUsers()) {
@@ -83,7 +84,8 @@ public class DirectoryUserGroups {
     System.out.println("user with credential " + credential + " not found");
     return null;
   }
-
+  //we search a concrete userGroup by a user that belongs to it
+  //returns a UserGroup object if it finds it
   public static UserGroup findUserGroupByUser(String credential) {
     for (UserGroup userGroup: userGroups) {
       for (User user : userGroup.getUsers()) {

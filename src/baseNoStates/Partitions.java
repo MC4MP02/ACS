@@ -26,6 +26,7 @@ public class Partitions extends Area {
   //public ArrayList<Area> getChilds() { return childs; }
 
   // getter of the doors that the Partition has access to
+    //returns an ArrayList of doors with Door type
   @Override
   public ArrayList<Door> getDoorsGivingAccess() {
     ArrayList<Area> allAreas = new ArrayList<>();
@@ -43,7 +44,8 @@ public class Partitions extends Area {
   public ArrayList<Door> getDoors() {
     return doors;
   }// getter of the array of doors of the partition
-
+    // function for search in all the Areas by the id
+    // return: Area that matches the id
   @Override
   public Area findAreaById(String id) {
     if (this.getId().equals(id)) {

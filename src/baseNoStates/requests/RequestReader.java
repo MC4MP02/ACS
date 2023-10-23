@@ -20,6 +20,7 @@ public class RequestReader implements Request {
   private String doorStateName;
   private boolean doorClosed;
 
+
   public RequestReader(String credential, String action, LocalDateTime now, String doorId) {
     this.credential = credential;
     this.action = action;
@@ -103,7 +104,7 @@ public class RequestReader implements Request {
       ArrayList<User> users = userGroup.getUsers();
 
       boolean areaTrue = false;
-      if (area.size() == 1 && area.get(0).getId().equals("building")) {
+      if (areas.size() == 1 && areas.get(0).getId().equals("building")) {
         areaTrue = true;
       } else {
         for (Area area : areas) {

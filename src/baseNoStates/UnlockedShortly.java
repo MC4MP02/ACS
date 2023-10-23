@@ -1,12 +1,14 @@
 package baseNoStates;
 
-
+//unlocked shortly class, we use that class for when whe want to unlock the door for
+//a short period of time.
 public class UnlockedShortly extends DoorState {
+  //basic class constructor
   public UnlockedShortly(Door door) {
     super(door);
     setName(States.UNLOCKED_SHORTLY);
   }
-
+  //we open the door in the Unlocked_shortly state
   public void open() {
     if (door.isClosed()) {
       door.setClosed(false);
@@ -14,7 +16,7 @@ public class UnlockedShortly extends DoorState {
       System.out.println("Can't open door " + door.getId() + " because it's already open");
     }
   }
-
+//we close the door in the unlocked_shortly state
   public void close() {
     if(!door.isClosed()) {
       door.setClosed(true);
@@ -24,10 +26,11 @@ public class UnlockedShortly extends DoorState {
       System.out.println("Can't close door " + door.getId() + " because it's already closed");
     }
   }
-
+  //the door is unlocked shortly, it will lock automatically after 10 s.
   public void lock() {
     System.out.println("Can't lock the door " + door.getId() + " because it's already locked");
   }
+  //the door is unlocked, we cant unlock it
   public void unlock() {
     System.out.println("Can't unlock door " + door.getId() + " because it's already unlocked");
   }
