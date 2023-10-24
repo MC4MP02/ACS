@@ -95,8 +95,9 @@ public class RequestReader implements Request {
       authorized = false;
       addReason("user doesn't exists");
     } else {
-      //TODO: get the who, where, when and what in order to decide, and if not
+      // TODO: get the who, where, when and what in order to decide, and if not
       // authorized add the reason(s)
+
       UserGroup userGroup = DirectoryUserGroups.findUserGroupByUser(user.getCredential());
 
       ArrayList<Area> areas = userGroup.getAreas();
@@ -129,7 +130,6 @@ public class RequestReader implements Request {
         else if (!isSchedule) reasons.add("User " + user.getName() + " has no access in this schedule");
         else if (!actionsTrue) reasons.add("User " + user.getName() + " can't do " + action);
       }
-      //authorized = true;
     }
   }
 }

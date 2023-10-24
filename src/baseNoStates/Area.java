@@ -22,5 +22,5 @@ abstract public class Area {
 
   abstract public ArrayList<Door> getDoorsGivingAccess(); // getter of the doors that the object area has access to
 
-  abstract public Area findAreaById(String id);
+  abstract public Area findAreaById(String id); // function that search in all the area by the id
 }

@@ -1,7 +1,7 @@
 package baseNoStates;
 
 //Extend of the abstract class DoorState. It indicates that the door is Unlocked
-//When the door is unlocked we can open, close and lock it me gusta el pene del capa y soy gay me llamo totalreps
+//When the door is unlocked we can open, close and lock it
 public class Unlocked extends DoorState {
 
   //sets the door state to unlocked

@@ -147,7 +147,8 @@ class Area {
 + {abstract} getFrom() : Area
 + {abstract} getDoors() : Door[]
 + {abstract} getDoorsGivingAccess() : Door[]
-+ {abstract} getAreas : Area[]
++ {abstract} getAreas() : Area[]
++ {abstract} findAreaById(id : String) : Area
 }
 
 class Partitions extends Area {
@@ -159,6 +160,7 @@ class Partitions extends Area {
 + getDoorsGivingAccess() : Door[]
 + getDoors() : Door[]
 + getAreas() : Area[]
++ findAreaById(id : String) : Area
 }
 
 class Propped extends DoorState {
@@ -192,6 +194,7 @@ class Spaces extends Area {
 + getDoorsGivingAccess() : Door[]
 + getDoors() : Door[]
 + getAreas() : Area[]
++ findAreaById(id : String) : Area
 }
 
 class DirectoryAreas {
@@ -206,6 +209,7 @@ DirectoryAreas --> "*" Area : "allAreas"
 class DirectoryDoorsAndAreas {
 - {static} allAreas : Area[]
 - {static} allDoors : Door[]
+- {static} root : Area
 + {static} makeDoorsAndAreas()
 + {static} findAreaById(id : String) : Area
 + {static} findDoorById(id : String) : Door
