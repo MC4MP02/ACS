@@ -50,7 +50,7 @@ public class Door {
         state.unlock();
         break;
       case Actions.UNLOCK_SHORTLY:
-        state.unlock_shorty();
+        state.unlock_shortly();
         break;
       default:
         assert false : "Unknown action " + action;

@@ -19,11 +19,7 @@ abstract public class DoorState{
 
   public void unlock() {} //the door is unlocked
 
-  public void unlock_shorty() {} //the door is unlocked for 10 seconds
+  public void unlock_shortly() {} //the door is unlocked for 10 seconds
 
-  //return name of the door
-  public String getName() {
-    return name;
-  }
   public void setName(String name) { this.name = name; } //used to assign a name to a door
 }

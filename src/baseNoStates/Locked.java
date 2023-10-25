@@ -45,7 +45,7 @@ public class Locked extends DoorState {
   // unlocked_shortly
   // Then a timer will start for 10 seconds, after this time the function will
   // check if the door is open or closed
-  public void unlock_shorty() {
+  public void unlock_shortly() {
     if (name.equals(States.LOCKED)) {
       name = States.UNLOCKED_SHORTLY;
       door.setState(new UnlockedShortly(door));

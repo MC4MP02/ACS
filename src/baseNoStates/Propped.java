@@ -29,4 +29,5 @@ public class Propped extends DoorState {
   public void unlock() {
     System.out.println("Can't unlock the door " + door.getId() + " because it's propped");
   }
+  public void unlock_shortly() { System.out.println("Can't unlock_shortly the door " + door.getId() + " because it's propped"); }
 }

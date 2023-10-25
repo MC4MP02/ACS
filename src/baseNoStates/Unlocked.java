@@ -42,7 +42,7 @@ public class Unlocked extends DoorState {
     System.out.println("Can't unlock door " + door.getId() + " because it's already unlocked");
   }
 
-  public void unlock_shorty() {
+  public void unlock_shortly() {
     System.out.println("Can't unlock_shortly door " + door.getId() + " because it's already unlocked");
   }
 }

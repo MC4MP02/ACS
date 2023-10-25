@@ -21,8 +21,6 @@ public class UserGroup {
   //all getters
   public ArrayList<User> getUsers() { return users; }
 
-  public void addUsers(User user) { this.users.add(user); }
-
   public ArrayList<Area> getAreas() { return areas; }
 
   public ArrayList<String> getActions() { return actions; }
