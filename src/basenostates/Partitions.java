@@ -10,18 +10,18 @@ import java.util.*;
 public class Partitions extends Area {
  private List<Area> childs;
   private Area from;
-  public Partitions(String ident,Area from) {
-    super(ident);
+  public Partitions(final String identArea, final Area fromArea) {
+    super(identArea);
     this.childs = new ArrayList<>();
-    this.from = from;
+    this.from = fromArea;
   }
 
   public Area getFrom() {
     return from;
   } // getter of the father Area
 
-  public void addChilds(Collection<Area> childs) {
-    this.childs.addAll(childs);
+  public void addChilds(final Collection<Area> childsAreas) {
+    this.childs.addAll(childsAreas);
   }
 
   //public ArrayList<Area> getChilds() { return childs; }
@@ -44,11 +44,11 @@ public class Partitions extends Area {
 
   public ArrayList<Door> getDoors() {
     return this.getDoors();
-  }// getter of the array of doors of the partition
+  } // getter of the array of doors of the partition
     // function for search in all the Areas by the id
     // return: Area that matches the id
   @Override
-  public Area findAreaById(String id) {
+  public Area findAreaById(final String id) {
     if (this.getId().equals(id)) {
       return this;
     } else {

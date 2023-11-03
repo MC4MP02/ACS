@@ -6,7 +6,7 @@ package basenostates;
  */
 public class UnlockedShortly extends DoorState {
   //basic class constructor
-  public UnlockedShortly(Door door) {
+  public UnlockedShortly(final Door door) {
     super(door);
     setName(States.UNLOCKED_SHORTLY);
   }
@@ -20,15 +20,13 @@ public class UnlockedShortly extends DoorState {
   }
 
   /**
-   * we close the door in the unlocked_shortly state
+   * we close the door in the unlocked_shortly state.
    */
 
   public void close() {
-    if(!door.isClosed()) {
+    if (!door.isClosed()) {
       door.setClosed(true);
-    }
-    else
-    {
+    } else {
       System.out.println("Can't close door " + door.getId() + " because it's already closed");
     }
   }
@@ -42,10 +40,12 @@ public class UnlockedShortly extends DoorState {
     System.out.println("Can't lock the door " + door.getId() + " because it's already locked");
   }
   /**
-   * the door is unlocked, we cant unlock it
+   * the door is unlocked, we cant unlock it.
    */
   public void unlock() {
     System.out.println("Can't unlock door " + door.getId() + " because it's already unlocked");
   }
-  public void unlock_shortly() { System.out.println("Can't unlock_shortly door " + door.getId() + " because it's already unlocked"); }
+  public void unlockShortly() {
+    System.out.println("Can't unlock_shortly door " + door.getId() + " because it's already unlocked");
+  }
 }

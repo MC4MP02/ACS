@@ -8,13 +8,13 @@ package basenostates;
 public class Unlocked extends DoorState {
 
   //sets the door state to unlocked
-  public Unlocked(Door door) {
+  public Unlocked(final Door door) {
     super(door);
     setName(States.UNLOCKED);
   }
 
   /**
-   * sets the attribute closed of the door to false so the door is now open
+   * sets the attribute closed of the door to false so the door is now open.
    */
   public void open() {
     if (door.isClosed() && name.equals(States.UNLOCKED)) {
@@ -25,20 +25,17 @@ public class Unlocked extends DoorState {
   }
 
   public void close() {
-    if(!door.isClosed()) {
+    if (!door.isClosed()) {
       door.setClosed(true);
-    }
-    else
-    {
+    } else {
       System.out.println("Can't close door " + door.getId() + " because it's already closed");
     }
   }
 
   public void lock() {
-    if(door.isClosed()) {
+    if (door.isClosed()) {
       door.setState(new Locked(door));
-    }
-    else {
+    } else {
       System.out.println("Can't lock door " + door.getId() + " because it's open");
     }
   }
@@ -47,7 +44,7 @@ public class Unlocked extends DoorState {
     System.out.println("Can't unlock door " + door.getId() + " because it's already unlocked");
   }
 
-  public void unlock_shortly() {
+  public void unlockShortly() {
     System.out.println("Can't unlock_shortly door " + door.getId() + " because it's already unlocked");
   }
 }

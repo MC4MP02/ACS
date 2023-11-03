@@ -11,9 +11,9 @@ public class Spaces extends Area {
 
   // spaces constructor, id, area and partition assignments.
 
-  public Spaces(String id, Area from) {
-    super(id);
-    this.from = from;
+  public Spaces(final String ident, final Area fromId) {
+    super(ident);
+    this.from = fromId;
   }
 
   // from getter
@@ -21,7 +21,8 @@ public class Spaces extends Area {
     return from;
   }
 
-  // this function searchs and returns a list of doors that are accessible for this space
+  // this function searchs and returns a
+  // list of doors that are accessible for this space
   // return: ArrayList Door type with all doors
   @Override
   public ArrayList<Door> getDoorsGivingAccess() {
@@ -47,7 +48,7 @@ public class Spaces extends Area {
   }
 
   @Override
-  public Area findAreaById(String id) {
+  public Area findAreaById(final String id) {
     if (this.getId().equals(id)) {
       return this;
     }
@@ -55,5 +56,7 @@ public class Spaces extends Area {
   }
 
   @Override
-  public String getId() { return this.getId(); }
+  public String getId() {
+    return this.getId();
+  }
 }

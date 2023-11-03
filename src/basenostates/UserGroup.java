@@ -14,19 +14,27 @@ public class UserGroup {
   private final ArrayList<User> users;
   private final ArrayList<Area> areas;
   //constructor that initializes the attributes with the provided values
-  public UserGroup(String id, Schedule schedule, ArrayList<String> actions, ArrayList<User> users, ArrayList<Area> areas) {
-    this.id = id;
-    this.schedule = schedule;
-    this.users = users;
-    this.areas = areas;
-    this.actions = actions;
+  public UserGroup(final String ident, final Schedule scheduleH, final ArrayList<String> actionsId, final ArrayList<User> usersId, final ArrayList<Area> areasId) {
+    this.id = ident;
+    this.schedule = scheduleH;
+    this.users = usersId;
+    this.areas = areasId;
+    this.actions = actionsId;
   }
   //all getters
-  public ArrayList<User> getUsers() { return users; }
+  public ArrayList<User> getUsers() {
+    return users;
+  }
 
-  public ArrayList<Area> getAreas() { return areas; }
+  public ArrayList<Area> getAreas() {
+    return areas;
+  }
 
-  public ArrayList<String> getActions() { return actions; }
+  public ArrayList<String> getActions() {
+    return actions;
+  }
 
-  public Schedule getSchedule() { return schedule; }
+  public Schedule getSchedule() {
+    return schedule;
+  }
 }

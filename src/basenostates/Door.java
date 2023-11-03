@@ -12,17 +12,17 @@ public class Door {
   private final Area from;
   private final Area to;
   private boolean closed;
-  public DoorState state;
+  private DoorState state;
 
-  public Door(String id, Area from, Area to) {
-    this.id = id;
-    this.from = from;
-    this.to = to;
+  public Door(final String doorId, final Area sourceArea, final Area targetArea) {
+    this.id = doorId;
+    this.from = sourceArea;
+    this.to = targetArea;
     closed = true;
     state = new Unlocked(this);
   }
 
-  public void processRequest(RequestReader request) {
+  public void processRequest(final RequestReader request) {
     // it is the Door that process the request because the door has and knows
     // its state, and if closed or open
     if (request.isAuthorized()) {
@@ -34,11 +34,11 @@ public class Door {
     request.setDoorStateName(getStateName());
   }
 
-  public void setState(DoorState doorStates) {
+  public void setState(final DoorState doorStates) {
     state = doorStates;
   }
 
-  private void doAction(String action) {
+  private void doAction(final String action) {
     switch (action) {
       case Actions.OPEN:
         state.open();
@@ -53,7 +53,7 @@ public class Door {
         state.unlock();
         break;
       case Actions.UNLOCK_SHORTLY:
-        state.unlock_shortly();
+        state.unlockShortly();
         break;
       default:
         assert false : "Unknown action " + action;
@@ -65,7 +65,8 @@ public class Door {
     return closed;
   }
 
-  public void setClosed(boolean closed) { this.closed = closed; }
+  public void setClosed(final boolean closedDoor) {
+    this.closed = closedDoor; }
 
   public String getId() {
     return id;
@@ -73,7 +74,8 @@ public class Door {
   public Area getTo() {
     return to;
   }
-  public Area getFrom() { return from; }
+  public Area getFrom() {
+    return from; }
 
   public String getStateName() {
     return state.name;

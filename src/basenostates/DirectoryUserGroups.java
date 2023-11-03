@@ -8,19 +8,25 @@ import java.util.Arrays;
  *Class to create the users and the groups of user.
  */
 
-public class DirectoryUserGroups {
+public final class DirectoryUserGroups {
+  private DirectoryUserGroups() {
+  }
   private static final Integer ONE = 1;
   private static final Integer YEAR = 2023;
 
-
-  private static Iterable<UserGroup> userGroups; //array of all the groups for search them
+  //array of all the groups for search them
+  private static Iterable<UserGroup> userGroups;
 
   //function to intialize all the users and groups of users
   public static void makeUserGroup() {
-    LocalDate dateInicioEmployees = LocalDate.of(YEAR, 9, ONE); //start date in format LocalDate
-    LocalDate dateFinEmployees = LocalDate.of(2024, 3, ONE); //end date in format LocalDate
-    LocalTime timeInicioEmployees = LocalTime.of(9,0); //start time in format LocalTime
-    LocalTime timeFinEmployees = LocalTime.of(17,0); //end time in format LocalTime
+    //start date in format LocalDate
+    LocalDate dateInicioEmployees = LocalDate.of(YEAR, Month.SEPTEMBER, ONE);
+    //end date in format LocalDate
+    LocalDate dateFinEmployees = LocalDate.of(2024, Month.MARCH, ONE);
+    //start time in format LocalTime
+    LocalTime timeInicioEmployees = LocalTime.of(9, 0);
+    //end time in format LocalTime
+    LocalTime timeFinEmployees = LocalTime.of(17, 0);
     //array of all the days in format DayOfWeek that the group have access
     ArrayList<DayOfWeek> daysEmployees = new ArrayList<>(Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY));
     //initialize a object of Schedule
@@ -37,10 +43,10 @@ public class DirectoryUserGroups {
     UserGroup employees = new UserGroup("employees", scheduleEmployees, actionsEmployees, usersEmployees, spacesEmployees);
 
 
-    LocalDate dateInicioManagers = LocalDate.of(2023, 9, ONE.intValue());
-    LocalDate dateFinManagers = LocalDate.of(2024, 3, ONE);
+    LocalDate dateInicioManagers = LocalDate.of(2023, Month.SEPTEMBER, ONE.intValue());
+    LocalDate dateFinManagers = LocalDate.of(2024, Month.MARCH, ONE);
     LocalTime timeInicioManagers = LocalTime.of(8, 0);
-    LocalTime timeFinManagers= LocalTime.of(20, 0);
+    LocalTime timeFinManagers = LocalTime.of(20, 0);
     ArrayList<DayOfWeek> daysManagers = new ArrayList<>(Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY));
     Schedule scheduleManagers = new Schedule(dateInicioManagers, dateFinManagers, daysManagers, timeInicioManagers, timeFinManagers);
 
@@ -80,7 +86,7 @@ public class DirectoryUserGroups {
   }
   //we search a concrete user by his credential
   //returns a User object if it finds it
-  public static User findUserByCredential(String credential) {
+  public static User findUserByCredential(final String credential) {
     for (UserGroup userGroup: userGroups) {
       for (User user : userGroup.getUsers()) {
         if (user.getCredential().equals(credential)) {
@@ -93,7 +99,7 @@ public class DirectoryUserGroups {
   }
   //we search a concrete userGroup by a user that belongs to it
   //returns a UserGroup object if it finds it
-  public static UserGroup findUserGroupByUser(String credential) {
+  public static UserGroup findUserGroupByUser(final String credential) {
     for (UserGroup userGroup: userGroups) {
       for (User user : userGroup.getUsers()) {
         if (user.getCredential().equals(credential)) {

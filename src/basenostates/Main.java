@@ -5,7 +5,10 @@ package basenostates;
  */
 
 public class Main {
-  public static void main(String[] args) {
+  private Main() {
+
+  }
+  public static void main(final String[] args) {
     DirectoryDoorsAndAreas.makeDoorsAndAreas();
     DirectoryUserGroups.makeUserGroup();
     new WebServer();

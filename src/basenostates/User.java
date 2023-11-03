@@ -9,9 +9,9 @@ public class User {
   private final String credential;
 
   // class constructor, we give to the object his name and credential
-  public User(String name, String credential) {
-    this.name = name;
-    this.credential = credential;
+  public User(final String nameId, final String credentialId) {
+    this.name = nameId;
+    this.credential = credentialId;
   }
 
   // getters

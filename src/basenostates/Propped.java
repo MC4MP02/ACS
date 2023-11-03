@@ -7,13 +7,14 @@ package basenostates;
 public class Propped extends DoorState {
 
   // class constructor
-  public Propped(Door door) {
-    super(door);
+  public Propped(final Door doorId) {
+    super(doorId);
     setName(States.PROPPED);
   }
-
-  // open, close, lock and unlock function for the propped state
-  // we can't open the door because it's open, can't unlock or lock it because it's propped
+  // open, close, lock and unlock function
+  // for the propped state
+  // we can't open the door because it's open,
+  // can't unlock or lock it because it's propped
   // we can close it only
   public void open() {
     System.out.println("Can't open the door " + door.getId() + " because it's already open");
@@ -31,5 +32,6 @@ public class Propped extends DoorState {
   public void unlock() {
     System.out.println("Can't unlock the door " + door.getId() + " because it's propped");
   }
-  public void unlock_shortly() { System.out.println("Can't unlock_shortly the door " + door.getId() + " because it's propped"); }
+  public void unlockShortly() {
+    System.out.println("Can't unlock_shortly the door " + door.getId() + " because it's propped"); }
 }

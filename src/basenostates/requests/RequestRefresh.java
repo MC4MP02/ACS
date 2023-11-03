@@ -24,11 +24,17 @@ public class RequestRefresh implements Request {
         + "}";
   }
 
-  // Also this is used to paint the simulator when the page is loaded, and to display
-  // doors and readers after passing from locked to propped or propped to locked,
-  // pressing the Refresh Request button of the simulator.
-  // Also, to quickly test if the partition requests sent by the client app in Flutter
-  // works or not, retrieves the state of all the doors so that the simulator can
+  // Also this is used to paint
+  // the simulator when the page is loaded,
+  // and to display
+  // doors and readers after passing
+  // from locked to propped or
+  // propped to locked, pressing the Refresh
+  // Request button of the simulator.
+  // Also, to quickly test if the partition
+  // requests sent by the client app in Flutter
+  // works or not, retrieves the state
+  // of all the doors so that the simulator can
   // repaint the readers
   public void process() {
     for (Door door : DirectoryDoorsAndAreas.getAllDoors()) {

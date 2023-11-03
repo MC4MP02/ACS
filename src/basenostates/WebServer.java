@@ -21,8 +21,9 @@ import java.util.StringTokenizer;
  */
 public class    WebServer {
   private static final int PORT = 8080; // port to listen connection
-  private static final DateTimeFormatter formatter =
+  private static final DateTimeFormatter formater =
           DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+  public static final int TWENTY = 20;
 
   public WebServer() {
     try {
@@ -44,7 +45,7 @@ public class    WebServer {
     // as an inner class, SocketThread sees WebServer attributes
     private final Socket insocked; // client connection via Socket class
 
-    SocketThread(Socket insocket) {
+    SocketThread(final Socket insocket) {
       this.insocked = insocket;
       this.start();
     }
@@ -80,7 +81,7 @@ public class    WebServer {
 
           parse = new StringTokenizer(resource, "/[?]=&");
           int i = 0;
-          String[] tokens = new String[20]; // more than the actual number of parameters
+          String[] tokens = new String[TWENTY]; // more than the actual number of parameters
           while (parse.hasMoreTokens()) {
             tokens[i] = parse.nextToken();
             System.out.println(i + " " + tokens[i]);
@@ -94,12 +95,14 @@ public class    WebServer {
             System.out.println("created request " + typeRequest + " " + request);
             request.process();
             System.out.println("processed request " + typeRequest + " " + request);
-            // Make the answer as a JSON string, to be sent to the Javascript client
+            // Make the answer as a JSON string,
+            // to be sent to the Javascript client
             String answer = makeJsonAnswer(request);
             System.out.println("answer\n" + answer);
             // Here we send the response to the client
             out.println(answer);
-            out.flush(); // flush character output stream buffer
+            // flush character output stream buffer
+            out.flush();
           }
         }
 
@@ -111,8 +114,9 @@ public class    WebServer {
       }
     }
 
-    private Request makeRequest(String[] tokens) {
-      // always return request because it contains the answer for the Javascript client
+    private Request makeRequest(final String[] tokens) {
+      // always return request because it
+      // contains the answer for the Javascript client
       System.out.print("tokens : ");
       for (String token : tokens) {
         System.out.print(token + ", ");
@@ -133,7 +137,7 @@ public class    WebServer {
           request = makeRequestArea(tokens);
           break;
         case "get_children":
-          //TODO: this is to be implemented when programming the mobile app in Flutter
+          //TO DO: this is to be implemented when programming the mobile app in Flutter
           // in order to navigate the hierarchy of partitions, spaces and doors
           assert false : "request get_children is not yet implemented";
           request = null;
@@ -148,18 +152,18 @@ public class    WebServer {
       return request;
     }
 
-    private RequestReader makeRequestReader(String[] tokens) {
+    private RequestReader makeRequestReader(final String[] tokens) {
       String credential = tokens[2];
       String action = tokens[4];
-      LocalDateTime dateTime = LocalDateTime.parse(tokens[6], formatter);
+      LocalDateTime dateTime = LocalDateTime.parse(tokens[6], formater);
       String doorId = tokens[8];
       return new RequestReader(credential, action, dateTime, doorId);
     }
 
-    private RequestArea makeRequestArea(String[] tokens) {
+    private RequestArea makeRequestArea(final String[] tokens) {
       String credential = tokens[2];
       String action = tokens[4];
-      LocalDateTime dateTime = LocalDateTime.parse(tokens[6], formatter);
+      LocalDateTime dateTime = LocalDateTime.parse(tokens[6], formater);
       String areaId = tokens[8];
       return new RequestArea(credential, action, dateTime, areaId);
     }
@@ -170,13 +174,16 @@ public class    WebServer {
       answer += "Content-type: application/json\r\n";
       answer += "Access-Control-Allow-Origin: *\r\n";
       // SUPERIMPORTANT to avoid the CORS problem :
-      // "Cross-Origin Request Blocked: The Same Origin Policy disallows reading
+      // "Cross-Origin Request Blocked:
+      // The Same Origin Policy disallows reading
       // the remote resource..."
-      answer += "\r\n"; // blank line between headers and content, very important !
+      // blank line between headers and content,
+      // very important!
+      answer += "\r\n";
       return answer;
     }
 
-    private String makeJsonAnswer(Request request) {
+    private String makeJsonAnswer(final Request request) {
       String answer = makeHeaderAnswer();
       answer += request.answerToJson().toString();
       return answer;

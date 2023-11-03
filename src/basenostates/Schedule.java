@@ -16,20 +16,22 @@ public class Schedule {
     private ArrayList<DayOfWeek> days;
 
 
-    public Schedule(LocalDate dateInici, LocalDate dateFin, ArrayList<DayOfWeek> days, LocalTime timeInici,
-            LocalTime timeFin) {
-        this.dateInici = dateInici;
-        this.dateFin = dateFin;
-        this.days = days;
-        this.timeInici = timeInici;
-        this.timeFin = timeFin;
+    public Schedule(final LocalDate dateInitial, final LocalDate dateFinal, final ArrayList<DayOfWeek> daysWeek, final LocalTime timeInit,
+            final LocalTime timeFinal) {
+        this.dateInici = dateInitial;
+        this.dateFin = dateFinal;
+        this.days = daysWeek;
+        this.timeInici = timeInit;
+        this.timeFin = timeFinal;
     }
 
-
-    //we use this function to know if we are between correct hours to confirm that
-    //we are in the correct schedule, we use that for the user's schedules.
+    //we use this function to know if
+    // we are between correct hours
+    // to confirm that
+    //we are in the correct schedule,
+    // we use that for the user's schedules.
     //returns a boolean.
-    public boolean isSchedule(LocalDateTime now) {
+    public boolean isSchedule(final LocalDateTime now) {
         boolean daysTrue = days.contains(now.getDayOfWeek());
         boolean dateTrue = now.toLocalDate().isAfter(dateInici) && now.toLocalDate().isBefore(dateFin);
         boolean timeTrue = now.toLocalTime().isAfter(timeInici) && now.toLocalTime().isBefore(timeFin);

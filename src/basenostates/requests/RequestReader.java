@@ -21,15 +21,15 @@ public class RequestReader implements Request {
   private boolean doorClosed;
 
 
-  public RequestReader(String credential, String action, LocalDateTime now, String doorId) {
-    this.credential = credential;
-    this.action = action;
-    this.doorId = doorId;
+  public RequestReader(final String credentialId, final String actionId, final LocalDateTime hourId, final String doorIdent) {
+    this.credential = credentialId;
+    this.action = actionId;
+    this.doorId = doorIdent;
     reasons = new ArrayList<>();
-    this.now = now;
+    this.now = hourId;
   }
 
-  public void setDoorStateName(String name) {
+  public void setDoorStateName(final String name) {
     doorStateName = name;
   }
 
@@ -41,7 +41,7 @@ public class RequestReader implements Request {
     return authorized;
   }
 
-  public void addReason(String reason) {
+  public void addReason(final String reason) {
     reasons.add(reason);
   }
 
@@ -74,7 +74,8 @@ public class RequestReader implements Request {
     return json;
   }
 
-  // see if the request is authorized and put this into the request, then send it to the door.
+  // see if the request is authorized and
+  // put this into the request, then send it to the door.
   // if authorized, perform the action.
   public void process() {
     User user = DirectoryUserGroups.findUserByCredential(credential);
@@ -83,19 +84,22 @@ public class RequestReader implements Request {
     authorize(user, door);
     // this sets the boolean authorize attribute of the request
     door.processRequest(this);
-    // even if not authorized we process the request, so that if desired we could log all
-    // the requests made to the server as part of processing the request
+    // even if not authorized we process the request,
+    // so that if desired we could log all
+    // the requests made to the server as part of
+    // processing the request
     doorClosed = door.isClosed();
   }
 
   // the result is put into the request object plus, if not authorized, why not,
   // only for testing
-  private void authorize(User user, Door door) {
+  private void authorize(final User user, final Door door) {
     if (user == null) {
       authorized = false;
       addReason("user doesn't exists");
     } else {
-      // TODO: get the who, where, when and what in order to decide, and if not
+      // TO DO: get the who, where, when and what
+      // in order to decide, and if not
       // authorized add the reason(s)
 
       UserGroup userGroup = DirectoryUserGroups.findUserGroupByUser(user.getCredential());
@@ -119,16 +123,22 @@ public class RequestReader implements Request {
 
       boolean actionsTrue = actions.contains(action);
 
-      if(areaTrue && isSchedule && actionsTrue) {
+      if (areaTrue && isSchedule && actionsTrue) {
         authorized = true;
       } else {
         authorized = false;
       }
 
       if (!authorized) {
-        if (!areaTrue) reasons.add("User " + user.getName() + " has no access to this area");
-        else if (!isSchedule) reasons.add("User " + user.getName() + " has no access in this schedule");
-        else if (!actionsTrue) reasons.add("User " + user.getName() + " can't do " + action);
+        if (!areaTrue) {
+          reasons.add("User " + user.getName() + " has no access to this area");
+        }
+        else if (!isSchedule) {
+          reasons.add("User " + user.getName() + " has no access in this schedule");
+        }
+        else if (!actionsTrue) {
+          reasons.add("User " + user.getName() + " can't do " + action);
+        }
       }
     }
   }

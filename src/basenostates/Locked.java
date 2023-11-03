@@ -11,10 +11,11 @@ import java.util.TimerTask;
 
 public class Locked extends DoorState {
 
-  private static int timeUnlocked = 10000;
+  private static final int MIL = 10000;
+  private static int timeUnlocked = MIL;
 
   // sets the state of the door to Locked
-  public Locked(Door door) {
+  public Locked(final Door door) {
     super(door);
     setName(States.LOCKED);
   }
@@ -49,7 +50,7 @@ public class Locked extends DoorState {
   // unlocked_shortly
   // Then a timer will start for 10 seconds, after this time the function will
   // check if the door is open or closed
-  public void unlock_shortly() {
+  public void unlockShortly() {
     if (name.equals(States.LOCKED)) {
       name = States.UNLOCKED_SHORTLY;
       door.setState(new UnlockedShortly(door));

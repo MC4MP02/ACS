@@ -8,47 +8,62 @@ import java.util.Arrays;
  */
 
 public final class DirectoryDoorsAndAreas {
-  private static ArrayList<Door> allDoors; // array to safe all the doors and be able to search for them
-  private static ArrayList<Area> allAreas; // array to safe all the areas and be able to search for them
+  /**
+   * array to safe all the doors
+   * and be able to search for them.
+   */
+  private static ArrayList<Door> allDoors;
+  /**
+   * array to safe all
+   * the areas and be able to search for them.
+   */
+  private static ArrayList<Area> allAreas;
   private static Area root;
+  private DirectoryDoorsAndAreas() {
 
-  // function to intialize all the areas and doors
+  }
+
+  /**
+   * function to intialize
+   * all the areas and doors.
+   */
   public static void makeDoorsAndAreas() {
     // Partitions:
-    // building --> basement, ground_floor, floor1, stair and exterior
+    // building --> basement, groundFloor,
+    // floor1, stair and exterior
 
     // Spaces:
     // basement --> parking
-    // ground_floor --> hall, room1, room2
-    // floor1 --> room3, corridor, IT
-
-    // Every Space/Partition have the "id" (to identify) and "fromSpace" (to know
+    // groundFloor --> hall, room1, room2
+    // floor1 --> room3, corridor, iT
+    // Every Space/Partition have the "id"
+    // (to identify) and "fromSpace" (to know
     // who is the parent Area)
+
 
     Partitions building = new Partitions("building", null);
     Partitions basement = new Partitions("basement", building);
-    Partitions ground_floor = new Partitions("ground_floor", building);
+    Partitions groundFloor = new Partitions("groundFloor", building);
     Partitions floor1 = new Partitions("floor1", building);
     Spaces parking = new Spaces("parking", basement);
     Spaces stairs = new Spaces("stairs", building);
-    Spaces room1 = new Spaces("room1", ground_floor);
-    Spaces room2 = new Spaces("room2", ground_floor);
+    Spaces room1 = new Spaces("room1", groundFloor);
+    Spaces room2 = new Spaces("room2", groundFloor);
     Spaces room3 = new Spaces("room3", floor1);
-    Spaces hall = new Spaces("hall", ground_floor);
+    Spaces hall = new Spaces("hall", groundFloor);
     Spaces corridor = new Spaces("corridor", floor1);
-    Spaces IT = new Spaces("IT", floor1);
+    Spaces iT = new Spaces("iT", floor1);
     Spaces exterior = new Spaces("exterior", building);
 
-    building.addChilds(new ArrayList<>(Arrays.asList(basement, ground_floor, floor1, exterior, stairs)));
+    building.addChilds(new ArrayList<>(Arrays.asList(basement, groundFloor, floor1, exterior, stairs)));
 
     basement.addChilds(new ArrayList<>(Arrays.asList(parking)));
 
-    ground_floor.addChilds(new ArrayList<>(Arrays.asList(room1, room2, hall)));
+    groundFloor.addChilds(new ArrayList<>(Arrays.asList(room1, room2, hall)));
 
-    floor1.addChilds(new ArrayList<>(Arrays.asList(corridor, IT)));
+    floor1.addChilds(new ArrayList<>(Arrays.asList(corridor, iT)));
 
-    allAreas = new ArrayList<>(Arrays.asList(building, ground_floor, floor1, parking, stairs, room1, room2, room3, hall,
-        corridor, IT, basement, exterior)); // initilize the allAreas
+    allAreas = new ArrayList<>(Arrays.asList(building, groundFloor, floor1, parking, stairs, room1, room2, room3, hall, corridor, iT, basement, exterior)); // initilize the allAreas
 
     root = building;
 
@@ -65,14 +80,14 @@ public final class DirectoryDoorsAndAreas {
     // first floor
     Door d7 = new Door("D7", stairs, corridor); // stairs, corridor
     Door d8 = new Door("D8", corridor, room3); // corridor, room3
-    Door d9 = new Door("D9", corridor, IT); // corridor, IT
+    Door d9 = new Door("D9", corridor, iT); // corridor, iT
 
     allDoors = new ArrayList<>(Arrays.asList(d1, d2, d3, d4, d5, d6, d7, d8, d9)); // initalize allDoors
   }
 
   // function for search in all the doors by the id
   // return: door that matches the id
-  public static Door findDoorById(String id) {
+  public static Door findDoorById(final String id) {
     for (Door door : allDoors) {
       if (door.getId().equals(id)) {
         return door;
@@ -84,7 +99,7 @@ public final class DirectoryDoorsAndAreas {
 
   // function for search in all the areas by the id
   // return: area that matches the id
-  public static Area findAreaById(String id) {
+  public static Area findAreaById(final String id) {
     return root.findAreaById(id);
   }
 
