@@ -1,8 +1,11 @@
-package baseNoStates;
+package basenostates;
 
-import java.time.*;
 import java.util.ArrayList;
-//UserGroup class that creates user groups in the system for using it for the different roles
+/**
+ *UserGroup class that creates user groups in the system
+ *for using it for the different roles.
+ */
+
 public class UserGroup {
   private final String id;
 

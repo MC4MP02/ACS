@@ -1,8 +1,11 @@
-package baseNoStates;
+package basenostates;
 
 import java.util.ArrayList;
 
-//spaces class, a space can have one or more doors, it's a closed site by doors.
+/**
+ *Spaces class, a space can have one or more doors.
+ *It's a closed site by doors.
+ */
 public class Spaces extends Area {
   private Area from;
 
@@ -33,26 +36,24 @@ public class Spaces extends Area {
         doors.add(allDoors.get(i));
       }
     }
-    this.doors = doors;
+    this.setDoors(doors);
     return doors;
   }
 
   // doors attribute getter
   @Override
   public ArrayList<Door> getDoors() {
-    return doors;
+    return this.getDoors();
   }
 
   @Override
   public Area findAreaById(String id) {
-    if (this.id.equals(id)) {
+    if (this.getId().equals(id)) {
       return this;
     }
     return null;
   }
 
   @Override
-  public String getId() {
-    return id;
-  }
+  public String getId() { return this.getId(); }
 }

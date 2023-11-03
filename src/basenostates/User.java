@@ -1,6 +1,9 @@
-package baseNoStates;
+package basenostates;
 
-//user class, we create on it a user with his name and his credential
+/**
+ *User class, we create on it a user with
+ *his name and his credential.
+ */
 public class User {
   private final String name;
   private final String credential;

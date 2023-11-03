@@ -1,9 +1,9 @@
-package baseNoStates;
+package basenostates;
 
-import baseNoStates.requests.Request;
-import baseNoStates.requests.RequestReader;
-import baseNoStates.requests.RequestRefresh;
-import baseNoStates.requests.RequestArea;
+import basenostates.requests.Request;
+import basenostates.requests.RequestReader;
+import basenostates.requests.RequestRefresh;
+import basenostates.requests.RequestArea;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,9 +15,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.StringTokenizer;
 
-// Based on
-// https://www.ssaurel.com/blog/create-a-simple-http-web-server-in-java
-// http://www.jcgonzalez.com/java-socket-mini-server-http-example
+/** Based on
+ *<a href="https://www.ssaurel.com/blog/create-a-simple-http-web-server-in-java">...</a>
+ *<a href="http://www.jcgonzalez.com/java-socket-mini-server-http-example">...</a>
+ */
 public class    WebServer {
   private static final int PORT = 8080; // port to listen connection
   private static final DateTimeFormatter formatter =

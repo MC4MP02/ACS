@@ -1,11 +1,11 @@
-package baseNoStates.requests;
+package basenostates.requests;
 
-import baseNoStates.*;
+import basenostates.*;
 
 import java.time.*;
 import java.util.ArrayList;
+import java.util.List;
 
-import com.sun.source.tree.DirectiveTree;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -100,8 +100,8 @@ public class RequestReader implements Request {
 
       UserGroup userGroup = DirectoryUserGroups.findUserGroupByUser(user.getCredential());
 
-      ArrayList<Area> areas = userGroup.getAreas();
-      ArrayList<String> actions = userGroup.getActions();
+      List<Area> areas = userGroup.getAreas();
+      List<String> actions = userGroup.getActions();
       ArrayList<User> users = userGroup.getUsers();
 
       boolean areaTrue = false;

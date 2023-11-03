@@ -1,9 +1,12 @@
-package baseNoStates;
+package basenostates;
 
-import baseNoStates.requests.RequestReader;
+import basenostates.requests.RequestReader;
 import org.json.JSONObject;
 
-// Doors class, we have on it the declaration
+/**
+ *Doors class, we have on it the declaration. me gusta el pene
+ */
+
 public class Door {
   private final String id;
   private final Area from;

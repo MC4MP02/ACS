@@ -1,7 +1,10 @@
-package baseNoStates;
+package basenostates;
 
-//Extend of the abstract class DoorState. It indicates that the door is Unlocked
-//When the door is unlocked we can open, close and lock it
+/**
+ *Extend of the abstract class DoorState.
+ *It indicates that the door is Unlocked.
+ *When the door is unlocked we can open, close and lock it.
+ */
 public class Unlocked extends DoorState {
 
   //sets the door state to unlocked
@@ -10,7 +13,9 @@ public class Unlocked extends DoorState {
     setName(States.UNLOCKED);
   }
 
-  //sets the attribute closed of the door to false so the door is now open
+  /**
+   * sets the attribute closed of the door to false so the door is now open
+   */
   public void open() {
     if (door.isClosed() && name.equals(States.UNLOCKED)) {
       door.setClosed(false);

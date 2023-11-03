@@ -1,7 +1,9 @@
-package baseNoStates;
+package basenostates;
 
-// door states, static declarations (only one assignation for all objects of the class)
-
+/**
+ *Door states, static declarations.
+ *(Only one assignation for all objects of the class.)
+ */
 public class States {
   public static String LOCKED = "locked"; 
   public static String UNLOCKED = "unlocked";

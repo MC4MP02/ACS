@@ -1,6 +1,6 @@
-package baseNoStates.requests;
+package basenostates.requests;
 
-import baseNoStates.*;
+import basenostates.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -76,7 +76,7 @@ public class RequestArea implements Request {
 
       // Make all the door requests, one for each door in the area, and process them.
       // Look for the doors in the spaces of this area that give access to them.
-      ArrayList<Door> doorsGivingAccess = area.getDoorsGivingAccess();
+      Iterable<Door> doorsGivingAccess = area.getDoorsGivingAccess();
       for (Door door : doorsGivingAccess) {
         RequestReader requestReader = new RequestReader(credential, action, now, door.getId());
         requestReader.process();

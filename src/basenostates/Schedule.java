@@ -1,9 +1,13 @@
-package baseNoStates;
+package basenostates;
 
 import java.time.*;
 import java.util.ArrayList;
 
-// schedule class that has times and days, we need the class for the most time aspects 
+/**
+ *Schedule class that has times and days.
+ *We need the class for the most time aspects.
+ */
+
 public class Schedule {
     private LocalDate dateInici;
     private LocalDate dateFin;
@@ -11,7 +15,7 @@ public class Schedule {
     private LocalTime timeFin;
     private ArrayList<DayOfWeek> days;
 
-    // class constructor with all class atributes
+
     public Schedule(LocalDate dateInici, LocalDate dateFin, ArrayList<DayOfWeek> days, LocalTime timeInici,
             LocalTime timeFin) {
         this.dateInici = dateInici;

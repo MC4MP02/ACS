@@ -1,7 +1,9 @@
-package baseNoStates;
-
-//propped class, the door passes to propped state when the door is unlocked_shortly during 10s, the door is open
-//and no one closes it
+package basenostates;
+/**
+ *Propped class, the door passes to propped state when the
+ *door is unlocked_shortly during 10s, the door is open
+ *and no one closes it.
+ */
 public class Propped extends DoorState {
 
   // class constructor

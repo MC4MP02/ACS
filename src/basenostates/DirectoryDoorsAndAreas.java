@@ -1,9 +1,12 @@
-package baseNoStates;
+package basenostates;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-//class to create areas(spaces, partitions) and doors
+/**
+ *Class to create areas(spaces, partitions) and doors.
+ */
+
 public final class DirectoryDoorsAndAreas {
   private static ArrayList<Door> allDoors; // array to safe all the doors and be able to search for them
   private static ArrayList<Area> allAreas; // array to safe all the areas and be able to search for them

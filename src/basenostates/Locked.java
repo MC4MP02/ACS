@@ -1,10 +1,14 @@
-package baseNoStates;
+package basenostates;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-//Extend of the abstract class DoorState. It indicates that the door is locked
-//When the door is locked we can't open it
+/**
+ *Extend of the abstract class DoorState.
+ *It indicates that the door is locked.
+ *When the door is locked we can't open it.
+ */
+
 public class Locked extends DoorState {
 
   private static int timeUnlocked = 10000;

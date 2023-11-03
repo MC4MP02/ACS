@@ -1,16 +1,17 @@
-package baseNoStates;
+package basenostates;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Vector;
+import java.util.*;
 
-//Extend from Area, is a type of Area
-//A partition is a group of spaces
+/**
+ *Extend from Area, is a type of Area.
+ *A partition is a group of spaces.
+ */
+
 public class Partitions extends Area {
- private ArrayList<Area> childs;
+ private List<Area> childs;
   private Area from;
-  public Partitions(String id,Area from) {
-    super(id);
+  public Partitions(String ident,Area from) {
+    super(ident);
     this.childs = new ArrayList<>();
     this.from = from;
   }
@@ -19,7 +20,7 @@ public class Partitions extends Area {
     return from;
   } // getter of the father Area
 
-  public void addChilds(ArrayList<Area> childs) {
+  public void addChilds(Collection<Area> childs) {
     this.childs.addAll(childs);
   }
 
@@ -29,7 +30,7 @@ public class Partitions extends Area {
     //returns an ArrayList of doors with Door type
   @Override
   public ArrayList<Door> getDoorsGivingAccess() {
-    ArrayList<Area> allAreas = new ArrayList<>();
+    List<Area> allAreas = new ArrayList<>();
     ArrayList<Door> doors = new ArrayList<>();
     allAreas = DirectoryDoorsAndAreas.getAllAreas();
 
@@ -42,7 +43,7 @@ public class Partitions extends Area {
   }
 
   public ArrayList<Door> getDoors() {
-    return doors;
+    return this.getDoors();
   }// getter of the array of doors of the partition
     // function for search in all the Areas by the id
     // return: Area that matches the id
@@ -63,6 +64,6 @@ public class Partitions extends Area {
 
   @Override
   public String getId() {
-    return id;
+    return this.getId();
   }
 }

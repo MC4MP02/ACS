@@ -1,7 +1,8 @@
-package baseNoStates;
+package basenostates;
 
-
-//abstract class that indicates the different states of a door
+/**
+ *Abstract class that indicates the different states of a door.
+ */
 abstract public class DoorState{
   protected Door door;
   protected String name;
