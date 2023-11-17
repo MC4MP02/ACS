@@ -18,7 +18,7 @@ public final class DirectoryDoorsAndAreas {
    * the areas and be able to search for them.
    */
   private static ArrayList<Area> allAreas;
-  private static Area root;
+  private static Area root = null;
   private DirectoryDoorsAndAreas() {
 
   }

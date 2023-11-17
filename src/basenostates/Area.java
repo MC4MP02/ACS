@@ -15,7 +15,9 @@ import java.util.ArrayList;
     this.id = ident;
   }
 
- public abstract String getId(); // getter of area's id
+ public String getId() {
+   return id;
+ } // getter of area's id
 
  public abstract Area getFrom(); // getter from the object's parent area
 

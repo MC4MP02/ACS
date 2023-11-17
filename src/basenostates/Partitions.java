@@ -64,6 +64,6 @@ public class Partitions extends Area {
 
   @Override
   public String getId() {
-    return this.getId();
+    return super.getId();
   }
 }

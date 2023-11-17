@@ -57,6 +57,6 @@ public class Spaces extends Area {
 
   @Override
   public String getId() {
-    return this.getId();
+    return super.getId();
   }
 }
