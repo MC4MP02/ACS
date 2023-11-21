@@ -4,12 +4,20 @@ package basenostates;
  *Abstract class that indicates the different states of a door.
  */
 public abstract  class DoorState {
-  public Door door;
-  protected String name;
+  private Door door;
+  private String name;
 
   public DoorState(final Door doorId) {
     this.door = doorId;
     this.name = States.UNLOCKED;
+  }
+
+  public Door getDoor() {
+    return this.door;
+  }
+
+  public String getName() {
+    return this.name;
   }
 
   public void open() { } //the door is open

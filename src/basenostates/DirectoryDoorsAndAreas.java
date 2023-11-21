@@ -55,7 +55,8 @@ public final class DirectoryDoorsAndAreas {
     Spaces iT = new Spaces("iT", floor1);
     Spaces exterior = new Spaces("exterior", building);
 
-    building.addChilds(new ArrayList<>(Arrays.asList(basement, groundFloor, floor1, exterior, stairs)));
+    building.addChilds(new ArrayList<>(Arrays.asList(basement, groundFloor,
+        floor1, exterior, stairs)));
 
     basement.addChilds(new ArrayList<>(Arrays.asList(parking)));
 
@@ -63,7 +64,9 @@ public final class DirectoryDoorsAndAreas {
 
     floor1.addChilds(new ArrayList<>(Arrays.asList(corridor, iT)));
 
-    allAreas = new ArrayList<>(Arrays.asList(building, groundFloor, floor1, parking, stairs, room1, room2, room3, hall, corridor, iT, basement, exterior)); // initilize the allAreas
+    allAreas = new ArrayList<>(Arrays.asList(building, groundFloor,
+        floor1, parking, stairs, room1, room2, room3, hall, corridor, iT,
+        basement, exterior)); // initilize the allAreas
 
     root = building;
 
@@ -82,7 +85,8 @@ public final class DirectoryDoorsAndAreas {
     Door d8 = new Door("D8", corridor, room3); // corridor, room3
     Door d9 = new Door("D9", corridor, iT); // corridor, iT
 
-    allDoors = new ArrayList<>(Arrays.asList(d1, d2, d3, d4, d5, d6, d7, d8, d9)); // initalize allDoors
+    allDoors = new ArrayList<>(Arrays.asList(d1, d2, d3, d4, d5, d6, d7, d8,
+        d9)); // initalize allDoors
   }
 
   // function for search in all the doors by the id

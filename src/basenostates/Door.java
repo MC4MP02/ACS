@@ -14,7 +14,8 @@ public class Door {
   private boolean closed;
   private DoorState state;
 
-  public Door(final String doorId, final Area sourceArea, final Area targetArea) {
+  public Door(final String doorId, final Area sourceArea,
+              final Area targetArea) {
     this.id = doorId;
     this.from = sourceArea;
     this.to = targetArea;
@@ -78,7 +79,7 @@ public class Door {
     return from; }
 
   public String getStateName() {
-    return state.name;
+    return state.getName();
   }
 
   @Override

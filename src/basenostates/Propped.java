@@ -17,21 +17,21 @@ public class Propped extends DoorState {
   // can't unlock or lock it because it's propped
   // we can close it only
   public void open() {
-    System.out.println("Can't open the door " + door.getId() + " because it's already open");
+    System.out.println("Can't open the door " + this.getDoor().getId() + " because it's already open");
   }
 
   public void close() {
-    door.setClosed(true);
-    door.setState(new Locked(door));
+    this.getDoor().setClosed(true);
+    this.getDoor().setState(new Locked(this.getDoor()));
   }
 
   public void lock() {
-    System.out.println("Can't lock the door " + door.getId() + " because it's propped");
+    System.out.println("Can't lock the door " + this.getDoor().getId() + " because it's propped");
   }
 
   public void unlock() {
-    System.out.println("Can't unlock the door " + door.getId() + " because it's propped");
+    System.out.println("Can't unlock the door " + this.getDoor().getId() + " because it's propped");
   }
   public void unlockShortly() {
-    System.out.println("Can't unlock_shortly the door " + door.getId() + " because it's propped"); }
+    System.out.println("Can't unlock_shortly the door " + this.getDoor().getId() + " because it's propped"); }
 }
