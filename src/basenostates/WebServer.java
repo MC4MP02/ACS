@@ -16,19 +16,25 @@ import java.time.format.DateTimeFormatter;
 import java.util.StringTokenizer;
 
 /** Based on
- *<a href="https://www.ssaurel.com/blog/create-a-simple-http-web-server-in-java">...</a>
- *<a href="http://www.jcgonzalez.com/java-socket-mini-server-http-example">...</a>
+ *<a
+ * href="https://www.ssaurel.com/blog/create-a-simple-http-web-server-in-java">
+ * ...</a>
+ *<a href="http://www.jcgonzalez.com/java-socket-mini-server-http-example">
+ *     ...</a>
  */
-public class    WebServer {
+public final class WebServer {
   private static final int PORT = 8080; // port to listen connection
-  private static final DateTimeFormatter formater =
+  private static final DateTimeFormatter FORMATER =
           DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
   public static final int TWENTY = 20;
 
-  public WebServer() {
+  private static WebServer instance = null;
+
+  private WebServer() {
     try {
       ServerSocket serverConnect = new ServerSocket(PORT);
-      System.out.println("Server started.\nListening for connections on port : " + PORT + " ...\n");
+      System.out.println("Server started.\nListening for connections on port : "
+              + PORT + " ...\n");
       // we listen until user halts server execution
       while (true) {
         // each client connection will be managed in a dedicated Thread
@@ -40,6 +46,12 @@ public class    WebServer {
     }
   }
 
+  public static WebServer getInstance() {
+    if (instance == null) {
+      instance = new WebServer();
+    }
+    return instance;
+  }
 
   private class SocketThread extends Thread {
     // as an inner class, SocketThread sees WebServer attributes
@@ -59,7 +71,8 @@ public class    WebServer {
 
       try {
         // we read characters from the client via input stream on the socket
-        in = new BufferedReader(new InputStreamReader(insocked.getInputStream()));
+        in = new BufferedReader(
+                new InputStreamReader(insocked.getInputStream()));
         // we get character output stream to client
         out = new PrintWriter(insocked.getOutputStream());
         // get first line of the request from the client
@@ -69,7 +82,8 @@ public class    WebServer {
         System.out.println("sockedthread : " + input);
 
         StringTokenizer parse = new StringTokenizer(input);
-        String method = parse.nextToken().toUpperCase(); // we get the HTTP method of the client
+        // we get the HTTP method of the client
+        String method = parse.nextToken().toUpperCase();
         if (!method.equals("GET")) {
           System.out.println("501 Not Implemented : " + method + " method.");
         } else {
@@ -81,7 +95,8 @@ public class    WebServer {
 
           parse = new StringTokenizer(resource, "/[?]=&");
           int i = 0;
-          String[] tokens = new String[TWENTY]; // more than the actual number of parameters
+          // more than the actual number of parameters
+          String[] tokens = new String[TWENTY];
           while (parse.hasMoreTokens()) {
             tokens[i] = parse.nextToken();
             System.out.println(i + " " + tokens[i]);
@@ -92,9 +107,11 @@ public class    WebServer {
           Request request = makeRequest(tokens);
           if (request != null) {
             String typeRequest = tokens[0];
-            System.out.println("created request " + typeRequest + " " + request);
+            System.out.println("created request "
+                    + typeRequest + " " + request);
             request.process();
-            System.out.println("processed request " + typeRequest + " " + request);
+            System.out.println("processed request "
+                    + typeRequest + " " + request);
             // Make the answer as a JSON string,
             // to be sent to the Javascript client
             String answer = makeJsonAnswer(request);
@@ -124,8 +141,9 @@ public class    WebServer {
       System.out.println();
 
       Request request;
-      // assertions below evaluated to false won't stop the webserver, just print an
-      // assertion error, maybe because the webserver runs in a socked thread
+      // assertions below evaluated to false won't stop the webserver,
+      // just print an assertion error, maybe because the webserver runs in a
+      // socked thread
       switch (tokens[0]) {
         case "refresh":
           request = new RequestRefresh();
@@ -137,8 +155,9 @@ public class    WebServer {
           request = makeRequestArea(tokens);
           break;
         case "get_children":
-          //TO DO: this is to be implemented when programming the mobile app in Flutter
-          // in order to navigate the hierarchy of partitions, spaces and doors
+          //TO DO: this is to be implemented when programming the mobile app
+          // in Flutter in order to navigate the hierarchy of partitions,
+          // spaces and doors
           assert false : "request get_children is not yet implemented";
           request = null;
           System.exit(-1);
@@ -155,7 +174,7 @@ public class    WebServer {
     private RequestReader makeRequestReader(final String[] tokens) {
       String credential = tokens[2];
       String action = tokens[4];
-      LocalDateTime dateTime = LocalDateTime.parse(tokens[6], formater);
+      LocalDateTime dateTime = LocalDateTime.parse(tokens[6], FORMATER);
       String doorId = tokens[8];
       return new RequestReader(credential, action, dateTime, doorId);
     }
@@ -163,7 +182,7 @@ public class    WebServer {
     private RequestArea makeRequestArea(final String[] tokens) {
       String credential = tokens[2];
       String action = tokens[4];
-      LocalDateTime dateTime = LocalDateTime.parse(tokens[6], formater);
+      LocalDateTime dateTime = LocalDateTime.parse(tokens[6], FORMATER);
       String areaId = tokens[8];
       return new RequestArea(credential, action, dateTime, areaId);
     }

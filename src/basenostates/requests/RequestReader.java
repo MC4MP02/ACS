@@ -1,8 +1,13 @@
 package basenostates.requests;
 
-import basenostates.*;
+import basenostates.User;
+import basenostates.Door;
+import basenostates.DirectoryDoorsAndAreas;
+import basenostates.DirectoryUserGroups;
+import basenostates.UserGroup;
+import basenostates.Area;
 
-import java.time.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +26,8 @@ public class RequestReader implements Request {
   private boolean doorClosed;
 
 
-  public RequestReader(final String credentialId, final String actionId, final LocalDateTime hourId, final String doorIdent) {
+  public RequestReader(final String credentialId, final String actionId,
+                       final LocalDateTime hourId, final String doorIdent) {
     this.credential = credentialId;
     this.action = actionId;
     this.doorId = doorIdent;
@@ -102,7 +108,8 @@ public class RequestReader implements Request {
       // in order to decide, and if not
       // authorized add the reason(s)
 
-      UserGroup userGroup = DirectoryUserGroups.findUserGroupByUser(user.getCredential());
+      UserGroup userGroup =
+              DirectoryUserGroups.findUserGroupByUser(user.getCredential());
 
       List<Area> areas = userGroup.getAreas();
       List<String> actions = userGroup.getActions();
@@ -132,11 +139,10 @@ public class RequestReader implements Request {
       if (!authorized) {
         if (!areaTrue) {
           reasons.add("User " + user.getName() + " has no access to this area");
-        }
-        else if (!isSchedule) {
-          reasons.add("User " + user.getName() + " has no access in this schedule");
-        }
-        else if (!actionsTrue) {
+        } else if (!isSchedule) {
+          reasons.add("User " + user.getName()
+                  + " has no access in this schedule");
+        } else if (!actionsTrue) {
           reasons.add("User " + user.getName() + " can't do " + action);
         }
       }

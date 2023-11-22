@@ -3,26 +3,36 @@ package basenostates;
 import basenostates.requests.RequestReader;
 import org.json.JSONObject;
 
+
 /**
- *Doors class, we have on it the declaration. me gusta el pene
+ *Doors class, we have on it the declaration.
  */
 
-public class Door {
+public class Door implements Observer {
   private final String id;
   private final Area from;
   private final Area to;
   private boolean closed;
   private DoorState state;
 
+  private long tiempoInicio;
+
+  private Clock clock;
+
+
   public Door(final String doorId, final Area sourceArea,
-              final Area targetArea) {
+              final Area targetArea, Clock clock) {
     this.id = doorId;
     this.from = sourceArea;
     this.to = targetArea;
     closed = true;
     state = new Unlocked(this);
+    this.clock = clock;
   }
 
+  public Clock getClock() {
+    return clock;
+  }
   public void processRequest(final RequestReader request) {
     // it is the Door that process the request because the door has and knows
     // its state, and if closed or open
@@ -33,6 +43,29 @@ public class Door {
       System.out.println("not authorized");
     }
     request.setDoorStateName(getStateName());
+  }
+
+  public void setTiempoInicio(Long tiempoInicio) {
+    this.tiempoInicio = tiempoInicio;
+  }
+  @Override
+  public void update(Observable o, Long dateTime) {
+    if(States.UNLOCKED_SHORTLY.equals(state.getName())){
+      long currentTime = (Long) dateTime;
+      long elapsedTime = currentTime - tiempoInicio;
+      long umbral = 10000;
+      System.out.println();
+      System.out.print("ELAPSED TIME: ");
+      System.out.print(elapsedTime/1000);
+
+      if(elapsedTime >= umbral) {
+        System.out.println();
+        System.out.println("FIN UNLOCKED SHORTLY");
+        clock.deleteObserver(this);
+        clock.stopClock();
+        setState(new Locked(this));
+      }
+    }
   }
 
   public void setState(final DoorState doorStates) {

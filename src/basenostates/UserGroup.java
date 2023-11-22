@@ -14,7 +14,10 @@ public class UserGroup {
   private final ArrayList<User> users;
   private final ArrayList<Area> areas;
   //constructor that initializes the attributes with the provided values
-  public UserGroup(final String ident, final Schedule scheduleH, final ArrayList<String> actionsId, final ArrayList<User> usersId, final ArrayList<Area> areasId) {
+  public UserGroup(final String ident, final Schedule scheduleH,
+                   final ArrayList<String> actionsId,
+                   final ArrayList<User> usersId,
+                   final ArrayList<Area> areasId) {
     this.id = ident;
     this.schedule = scheduleH;
     this.users = usersId;

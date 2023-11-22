@@ -1,6 +1,9 @@
 package basenostates;
 
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -16,8 +19,9 @@ public class Schedule {
     private ArrayList<DayOfWeek> days;
 
 
-    public Schedule(final LocalDate dateInitial, final LocalDate dateFinal, final ArrayList<DayOfWeek> daysWeek, final LocalTime timeInit,
-            final LocalTime timeFinal) {
+    public Schedule(final LocalDate dateInitial, final LocalDate dateFinal,
+                    final ArrayList<DayOfWeek> daysWeek,
+                    final LocalTime timeInit, final LocalTime timeFinal) {
         this.dateInici = dateInitial;
         this.dateFin = dateFinal;
         this.days = daysWeek;
@@ -33,8 +37,10 @@ public class Schedule {
     //returns a boolean.
     public boolean isSchedule(final LocalDateTime now) {
         boolean daysTrue = days.contains(now.getDayOfWeek());
-        boolean dateTrue = now.toLocalDate().isAfter(dateInici) && now.toLocalDate().isBefore(dateFin);
-        boolean timeTrue = now.toLocalTime().isAfter(timeInici) && now.toLocalTime().isBefore(timeFin);
+        boolean dateTrue = now.toLocalDate().isAfter(dateInici)
+                && now.toLocalDate().isBefore(dateFin);
+        boolean timeTrue = now.toLocalTime().isAfter(timeInici)
+                && now.toLocalTime().isBefore(timeFin);
 
         return daysTrue && dateTrue && timeTrue;
     }

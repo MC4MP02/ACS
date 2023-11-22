@@ -22,18 +22,21 @@ public class Locked extends DoorState {
 
   // If we try to open in Locked state, an error will appear
   public void open() {
-    System.out.println("Can't open the door " + this.getDoor().getId() + " because it's locked");
+    System.out.println("Can't open the door " + this.getDoor().getId()
+            + " because it's locked");
   }
 
   // If we try to close in Locked state, an error will appear
   public void close() {
-    System.out.println("Can't close the door " + this.getDoor().getId() + " because it's locked");
+    System.out.println("Can't close the door " + this.getDoor().getId()
+            + " because it's locked");
   }
 
-  // If we try to lock in Locked state, an error will appear because it's already
-  // locked
+  // If we try to lock in Locked state, an error will appear because
+  // it's already locked
   public void lock() {
-    System.out.println("Can't lock the door " + this.getDoor().getId() + " because it's already locked");
+    System.out.println("Can't lock the door " + this.getDoor().getId()
+            + " because it's already locked");
   }
 
   // We can unlock the door and we change the state to Unlocked
@@ -42,7 +45,8 @@ public class Locked extends DoorState {
       this.setName(States.UNLOCKED);
       this.getDoor().setState(new Unlocked(this.getDoor()));
     } else {
-      System.out.println("Can't unlock door " + this.getDoor().getId() + " because it's already unlock");
+      System.out.println("Can't unlock door " + this.getDoor().getId()
+              + " because it's already unlock");
     }
   }
 
@@ -54,23 +58,6 @@ public class Locked extends DoorState {
     if (this.getName().equals(States.LOCKED)) {
       this.setName(States.UNLOCKED_SHORTLY);
       this.getDoor().setState(new UnlockedShortly(this.getDoor()));
-      Timer timer = new Timer();
-      timer.schedule(new TimerTask() {
-        @Override
-        public void run() {
-          // if the door is closed the new state will be Locked
-          if (this.getDoor().isClosed()) {
-            this.getDoor().setState(new Locked(this.getDoor()));
-          } else {
-            // if the door is open the new state will be Propped
-            this.getDoor().setState(new Propped(this.getDoor()));
-          }
-        }
-
-        private Door getDoor() {
-          return this.getDoor();
-        }
-      }, timeUnlocked);
     } else {
       System.out.println("Can't unlock_shortly door "
           + this.getDoor().getId() + " because it's already unlock");

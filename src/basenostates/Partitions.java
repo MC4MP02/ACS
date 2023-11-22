@@ -1,6 +1,8 @@
 package basenostates;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  *Extend from Area, is a type of Area.

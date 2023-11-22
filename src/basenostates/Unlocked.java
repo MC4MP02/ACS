@@ -20,7 +20,8 @@ public class Unlocked extends DoorState {
     if (this.getDoor().isClosed() && this.getName().equals(States.UNLOCKED)) {
       this.getDoor().setClosed(false);
     } else {
-      System.out.println("Can't open door " + this.getDoor().getId() + " because it's already open");
+      System.out.println("Can't open door " + this.getDoor().getId()
+              + " because it's already open");
     }
   }
 
@@ -28,7 +29,8 @@ public class Unlocked extends DoorState {
     if (!this.getDoor().isClosed()) {
       this.getDoor().setClosed(true);
     } else {
-      System.out.println("Can't close door " + this.getDoor().getId() + " because it's already closed");
+      System.out.println("Can't close door " + this.getDoor().getId()
+              + " because it's already closed");
     }
   }
 
@@ -36,16 +38,19 @@ public class Unlocked extends DoorState {
     if (this.getDoor().isClosed()) {
       this.getDoor().setState(new Locked(this.getDoor()));
     } else {
-      System.out.println("Can't lock door " + this.getDoor().getId() + " because it's open");
+      System.out.println("Can't lock door " + this.getDoor().getId()
+              + " because it's open");
     }
   }
 
   public void unlock() {
-    System.out.println("Can't unlock door " + this.getDoor().getId() + " because it's already unlocked");
+    System.out.println("Can't unlock door " + this.getDoor().getId()
+            + " because it's already unlocked");
   }
 
   public void unlockShortly() {
-    System.out.println("Can't unlock_shortly door " + this.getDoor().getId() + " because it's already unlocked");
+    System.out.println("Can't unlock_shortly door " + this.getDoor().getId()
+            + " because it's already unlocked");
   }
 }
 

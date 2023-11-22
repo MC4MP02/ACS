@@ -1,6 +1,9 @@
 package basenostates.requests;
 
-import basenostates.*;
+import basenostates.Actions;
+import basenostates.Area;
+import basenostates.DirectoryDoorsAndAreas;
+import basenostates.Door;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -16,7 +19,8 @@ public class RequestArea implements Request {
   private ArrayList<RequestReader> requests = new ArrayList<>();
 
 
-  public RequestArea(final String credentialId, final String actionId, final LocalDateTime hourId, final String areaIdent) {
+  public RequestArea(final String credentialId, final String actionId,
+                     final LocalDateTime hourId, final String areaIdent) {
     this.credential = credentialId;
     this.areaId = areaIdent;
     assert actionId.equals(Actions.LOCK) || actionId.equals(Actions.UNLOCK)
@@ -87,7 +91,8 @@ public class RequestArea implements Request {
       // this area that give access to them.
       Iterable<Door> doorsGivingAccess = area.getDoorsGivingAccess();
       for (Door door : doorsGivingAccess) {
-        RequestReader requestReader = new RequestReader(credential, action, now, door.getId());
+        RequestReader requestReader = new RequestReader(credential,
+                action, now, door.getId());
         requestReader.process();
         // after process() the area request
         // contains the answer as the answer
