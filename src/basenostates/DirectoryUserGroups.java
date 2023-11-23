@@ -59,7 +59,7 @@ public final class DirectoryUserGroups {
         actionsEmployees, usersEmployees, spacesEmployees);
 
 
-    LocalDate dateInicioManagers = LocalDate.of(2023, Month.SEPTEMBER,
+    LocalDate dateInicioManagers = LocalDate.of(YEAR, Month.SEPTEMBER,
         ONE.intValue());
     LocalDate dateFinManagers = LocalDate.of(2024, Month.MARCH, ONE);
     LocalTime timeInicioManagers = LocalTime.of(8, 0);
@@ -83,7 +83,7 @@ public final class DirectoryUserGroups {
         actionsManagers, usersManagers, spacesManagers);
 
 
-    LocalDate dateInicioAdmin = LocalDate.of(2023, ONE, ONE);
+    LocalDate dateInicioAdmin = LocalDate.of(YEAR, ONE, ONE);
     LocalDate dateFinAdmin = LocalDate.of(2100, ONE, ONE);
     LocalTime timeInicioAdmin = LocalTime.of(0, 0);
     LocalTime timeFinAdmin = LocalTime.of(23, 59);

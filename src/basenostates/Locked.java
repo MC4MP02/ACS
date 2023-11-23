@@ -11,8 +11,6 @@ import org.slf4j.LoggerFactory;
 
 public class Locked extends DoorState {
   private static final Logger LOGGER = LoggerFactory.getLogger(Locked.class);
-  private static final int MIL = 10000;
-  private static int timeUnlocked = MIL;
 
   // sets the state of the door to Locked
   public Locked(final Door door) {

@@ -1,8 +1,5 @@
 package basenostates;
 
-/**
- * Class Actions.
- */
 public final class Actions {
 
   private Actions() {

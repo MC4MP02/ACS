@@ -29,7 +29,6 @@ public final class WebServer {
   private static final int PORT = 8080; // port to listen connection
   private static final DateTimeFormatter FORMATER =
           DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-  public static final int TWENTY = 20;
 
   private static WebServer instance = null;
 
@@ -99,7 +98,7 @@ public final class WebServer {
           parse = new StringTokenizer(resource, "/[?]=&");
           int i = 0;
           // more than the actual number of parameters
-          String[] tokens = new String[TWENTY];
+          String[] tokens = new String[20];
           while (parse.hasMoreTokens()) {
             tokens[i] = parse.nextToken();
             System.out.println(i + " " + tokens[i]);
