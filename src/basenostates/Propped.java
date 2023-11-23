@@ -1,10 +1,15 @@
 package basenostates;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  *Propped class, the door passes to propped state when the
  *door is unlocked_shortly during 10s, the door is open
  *and no one closes it.
  */
 public class Propped extends DoorState {
+  private static final Logger LOGGER = LoggerFactory.getLogger(Propped.class);
 
   // class constructor
   public Propped(final Door doorId) {
@@ -17,7 +22,7 @@ public class Propped extends DoorState {
   // can't unlock or lock it because it's propped
   // we can close it only
   public void open() {
-    System.out.println("Can't open the door " + this.getDoor().getId()
+    LOGGER.warn("Can't open the door " + this.getDoor().getId()
             + " because it's already open");
   }
 
@@ -27,15 +32,16 @@ public class Propped extends DoorState {
   }
 
   public void lock() {
-    System.out.println("Can't lock the door " + this.getDoor().getId()
+    LOGGER.warn("Can't lock the door " + this.getDoor().getId()
             + " because it's propped");
   }
 
   public void unlock() {
-    System.out.println("Can't unlock the door " + this.getDoor().getId()
+    LOGGER.warn("Can't unlock the door " + this.getDoor().getId()
             + " because it's propped");
   }
   public void unlockShortly() {
-    System.out.println("Can't unlock_shortly the door " + this.getDoor().getId()
-            + " because it's propped"); }
+    LOGGER.warn("Can't unlock_shortly the door " + this.getDoor().getId()
+            + " because it's propped");
+  }
 }

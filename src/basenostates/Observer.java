@@ -2,5 +2,5 @@ package basenostates;
 
 
 interface Observer {
-    public void update(Observable o, Long dateTime);
+    void update(Observable o, Long dateTime);
 }

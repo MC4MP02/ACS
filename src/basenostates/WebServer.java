@@ -14,6 +14,8 @@ import java.net.Socket;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.StringTokenizer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /** Based on
  *<a
@@ -23,6 +25,7 @@ import java.util.StringTokenizer;
  *     ...</a>
  */
 public final class WebServer {
+  private static final Logger LOGGER = LoggerFactory.getLogger(Unlocked.class);
   private static final int PORT = 8080; // port to listen connection
   private static final DateTimeFormatter FORMATER =
           DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
@@ -33,7 +36,7 @@ public final class WebServer {
   private WebServer() {
     try {
       ServerSocket serverConnect = new ServerSocket(PORT);
-      System.out.println("Server started.\nListening for connections on port : "
+      LOGGER.info("Server started.\nListening for connections on port : "
               + PORT + " ...\n");
       // we listen until user halts server execution
       while (true) {
@@ -42,7 +45,7 @@ public final class WebServer {
         // create dedicated thread to manage the client connection
       }
     } catch (IOException e) {
-      System.err.println("Server Connection error : " + e.getMessage());
+      LOGGER.warn("Server Connection error : " + e.getMessage());
     }
   }
 
@@ -79,19 +82,19 @@ public final class WebServer {
         String input = in.readLine();
         // we parse the request with a string tokenizer
 
-        System.out.println("sockedthread : " + input);
+        LOGGER.info("sockedthread : " + input);
 
         StringTokenizer parse = new StringTokenizer(input);
         // we get the HTTP method of the client
         String method = parse.nextToken().toUpperCase();
         if (!method.equals("GET")) {
-          System.out.println("501 Not Implemented : " + method + " method.");
+          LOGGER.warn("501 Not Implemented : " + method + " method.");
         } else {
           // what comes after "localhost:8080"
           resource = parse.nextToken();
-          System.out.println("input " + input);
-          System.out.println("method " + method);
-          System.out.println("resource " + resource);
+          LOGGER.info("input " + input);
+          LOGGER.info("method " + method);
+          LOGGER.info("resource " + resource);
 
           parse = new StringTokenizer(resource, "/[?]=&");
           int i = 0;
@@ -107,15 +110,15 @@ public final class WebServer {
           Request request = makeRequest(tokens);
           if (request != null) {
             String typeRequest = tokens[0];
-            System.out.println("created request "
+            LOGGER.info("created request "
                     + typeRequest + " " + request);
             request.process();
-            System.out.println("processed request "
+            LOGGER.info("processed request "
                     + typeRequest + " " + request);
             // Make the answer as a JSON string,
             // to be sent to the Javascript client
             String answer = makeJsonAnswer(request);
-            System.out.println("answer\n" + answer);
+            LOGGER.info("answer\n" + answer);
             // Here we send the response to the client
             out.println(answer);
             // flush character output stream buffer
@@ -127,18 +130,18 @@ public final class WebServer {
         out.close();
         insocked.close(); // we close socket connection
       } catch (Exception e) {
-        System.err.println("Exception : " + e);
+        LOGGER.warn("Exception : " + e);
       }
     }
 
     private Request makeRequest(final String[] tokens) {
       // always return request because it
       // contains the answer for the Javascript client
-      System.out.print("tokens : ");
+      LOGGER.info("tokens : ");
       for (String token : tokens) {
-        System.out.print(token + ", ");
+        LOGGER.info(token + ", ");
       }
-      System.out.println();
+      LOGGER.info("");
 
       Request request;
       // assertions below evaluated to false won't stop the webserver,

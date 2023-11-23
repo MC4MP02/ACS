@@ -1,10 +1,14 @@
 package basenostates;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  *Unlocked shortly class, we use that class when
  *we want to unlock the door for a short period of time.
  */
 public class UnlockedShortly extends DoorState {
+  private static final Logger LOGGER =
+          LoggerFactory.getLogger(UnlockedShortly.class);
   //basic class constructor
   public UnlockedShortly(final Door door) {
     super(door);
@@ -18,7 +22,7 @@ public class UnlockedShortly extends DoorState {
     if (this.getDoor().isClosed()) {
       this.getDoor().setClosed(false);
     } else {
-      System.out.println("Can't open door " + this.getDoor().getId()
+      LOGGER.warn("Can't open door " + this.getDoor().getId()
               + " because it's already open");
     }
   }
@@ -31,7 +35,7 @@ public class UnlockedShortly extends DoorState {
     if (!this.getDoor().isClosed()) {
       this.getDoor().setClosed(true);
     } else {
-      System.out.println("Can't close door " + this.getDoor().getId()
+      LOGGER.warn("Can't close door " + this.getDoor().getId()
               + " because it's already closed");
     }
   }
@@ -42,18 +46,18 @@ public class UnlockedShortly extends DoorState {
    */
 
   public void lock() {
-    System.out.println("Can't lock the door " + this.getDoor().getId()
+    LOGGER.warn("Can't lock the door " + this.getDoor().getId()
             + " because it's already locked");
   }
   /**
    * the door is unlocked, we cant unlock it.
    */
   public void unlock() {
-    System.out.println("Can't unlock door " + this.getDoor().getId()
+    LOGGER.warn("Can't unlock door " + this.getDoor().getId()
             + " because it's already unlocked");
   }
   public void unlockShortly() {
-    System.out.println("Can't unlock_shortly door " + this.getDoor().getId()
+    LOGGER.warn("Can't unlock_shortly door " + this.getDoor().getId()
             + " because it's already unlocked");
   }
 }

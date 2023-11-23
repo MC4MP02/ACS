@@ -1,7 +1,7 @@
 package basenostates;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *Extend of the abstract class DoorState.
@@ -10,7 +10,7 @@ import java.util.TimerTask;
  */
 
 public class Locked extends DoorState {
-
+  private static final Logger LOGGER = LoggerFactory.getLogger(Locked.class);
   private static final int MIL = 10000;
   private static int timeUnlocked = MIL;
 
@@ -22,20 +22,20 @@ public class Locked extends DoorState {
 
   // If we try to open in Locked state, an error will appear
   public void open() {
-    System.out.println("Can't open the door " + this.getDoor().getId()
+    LOGGER.warn("Can't open the door " + this.getDoor().getId()
             + " because it's locked");
   }
 
   // If we try to close in Locked state, an error will appear
   public void close() {
-    System.out.println("Can't close the door " + this.getDoor().getId()
+    LOGGER.warn("Can't close the door " + this.getDoor().getId()
             + " because it's locked");
   }
 
   // If we try to lock in Locked state, an error will appear because
   // it's already locked
   public void lock() {
-    System.out.println("Can't lock the door " + this.getDoor().getId()
+    LOGGER.warn("Can't lock the door " + this.getDoor().getId()
             + " because it's already locked");
   }
 
@@ -45,7 +45,7 @@ public class Locked extends DoorState {
       this.setName(States.UNLOCKED);
       this.getDoor().setState(new Unlocked(this.getDoor()));
     } else {
-      System.out.println("Can't unlock door " + this.getDoor().getId()
+      LOGGER.warn("Can't unlock door " + this.getDoor().getId()
               + " because it's already unlock");
     }
   }
@@ -59,7 +59,7 @@ public class Locked extends DoorState {
       this.setName(States.UNLOCKED_SHORTLY);
       this.getDoor().setState(new UnlockedShortly(this.getDoor()));
     } else {
-      System.out.println("Can't unlock_shortly door "
+      LOGGER.warn("Can't unlock_shortly door "
           + this.getDoor().getId() + " because it's already unlock");
     }
   }

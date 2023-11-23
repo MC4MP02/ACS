@@ -3,11 +3,16 @@ package basenostates;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  *Class to create areas(spaces, partitions) and doors.
  */
 
 public final class DirectoryDoorsAndAreas {
+  private static final Logger LOGGER =
+          LoggerFactory.getLogger(DirectoryDoorsAndAreas.class);
   /**
    * array to safe all the doors
    * and be able to search for them.
@@ -100,7 +105,7 @@ public final class DirectoryDoorsAndAreas {
         return door;
       }
     }
-    System.out.println("door with id " + id + " not found");
+    LOGGER.warn("door with id " + id + " not found");
     return null; // otherwise we get a Java error
   }
 
@@ -112,14 +117,14 @@ public final class DirectoryDoorsAndAreas {
 
   // this is needed by RequestRefresh
   public static ArrayList<Door> getAllDoors() {
-    System.out.println(allDoors);
+    LOGGER.info("" + allDoors);
     return allDoors;
   }
 
   // gettes for the array allAreas
   // return: Array of all the areas
   public static ArrayList<Area> getAllAreas() {
-    System.out.println(allAreas);
+    LOGGER.info("" + allAreas);
     return allAreas;
   }
 

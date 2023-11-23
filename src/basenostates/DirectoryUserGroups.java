@@ -1,5 +1,8 @@
 package basenostates;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.LocalDate;
@@ -12,6 +15,8 @@ import java.util.Arrays;
  */
 
 public final class DirectoryUserGroups {
+  private static final Logger LOGGER =
+          LoggerFactory.getLogger(DirectoryUserGroups.class);
   private DirectoryUserGroups() {
   }
   private static final Integer ONE = 1;
@@ -78,8 +83,8 @@ public final class DirectoryUserGroups {
         actionsManagers, usersManagers, spacesManagers);
 
 
-    LocalDate dateInicioAdmin = LocalDate.of(2023, 1, 1);
-    LocalDate dateFinAdmin = LocalDate.of(2100, 1, 1);
+    LocalDate dateInicioAdmin = LocalDate.of(2023, ONE, ONE);
+    LocalDate dateFinAdmin = LocalDate.of(2100, ONE, ONE);
     LocalTime timeInicioAdmin = LocalTime.of(0, 0);
     LocalTime timeFinAdmin = LocalTime.of(23, 59);
     ArrayList<DayOfWeek> daysAdmin = new ArrayList<>(Arrays.asList(
@@ -128,7 +133,7 @@ public final class DirectoryUserGroups {
         }
       }
     }
-    System.out.println("user with credential " + credential + " not found");
+    LOGGER.warn("user with credential " + credential + " not found");
     return null;
   }
   //we search a concrete userGroup by a user that belongs to it
@@ -141,7 +146,7 @@ public final class DirectoryUserGroups {
         }
       }
     }
-    System.out.println("user with credential " + credential + " not found");
+    LOGGER.warn("user with credential " + credential + " not found");
     return null;
   }
 }

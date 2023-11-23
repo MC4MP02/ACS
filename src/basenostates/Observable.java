@@ -1,7 +1,5 @@
 package basenostates;
 
-import java.time.LocalDateTime;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -9,18 +7,18 @@ abstract class Observable {
     private ArrayList<Observer> observers = new ArrayList<>();
     private boolean changed = false;
 
-    protected boolean deteniendoReloj = false;
+    private boolean deteniendoReloj = false;
 
     public boolean isChanged() {
         return changed;
     }
-    public synchronized void addObserver(Observer ob) {
+    public synchronized void addObserver(final Observer ob) {
         if (!observers.contains(ob)) {
             observers.add(ob);
         }
     }
 
-    public synchronized void deleteObserver(Observer ob) {
+    public synchronized void deleteObserver(final Observer ob) {
         Iterator<Observer> iterator = observers.iterator();
         while (iterator.hasNext()) {
             Observer obs = iterator.next();
@@ -30,12 +28,12 @@ abstract class Observable {
         }
     }
 
-    public void setChanged(boolean changed) {
-        this.changed = changed;
+    public void setChanged(final boolean cambiado) {
+        this.changed = cambiado;
     }
 
-    public synchronized void notifyObservers(Long dateTime) {
-        if(isChanged()) {
+    public synchronized void notifyObservers(final Long dateTime) {
+        if (isChanged()) {
             Iterator<Observer> iterator = new ArrayList<>(observers).iterator();
             while (iterator.hasNext()) {
                 Observer ob = iterator.next();

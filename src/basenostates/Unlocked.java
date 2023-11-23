@@ -1,12 +1,14 @@
 package basenostates;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  *Extend of the abstract class DoorState.
  *It indicates that the door is Unlocked.
  *When the door is unlocked we can open, close and lock it.
  */
 public class Unlocked extends DoorState {
-
+  private static final Logger LOGGER = LoggerFactory.getLogger(Unlocked.class);
   //sets the door state to unlocked
   public Unlocked(final Door door) {
     super(door);
@@ -20,7 +22,7 @@ public class Unlocked extends DoorState {
     if (this.getDoor().isClosed() && this.getName().equals(States.UNLOCKED)) {
       this.getDoor().setClosed(false);
     } else {
-      System.out.println("Can't open door " + this.getDoor().getId()
+      LOGGER.warn("Can't open door " + this.getDoor().getId()
               + " because it's already open");
     }
   }
@@ -29,7 +31,7 @@ public class Unlocked extends DoorState {
     if (!this.getDoor().isClosed()) {
       this.getDoor().setClosed(true);
     } else {
-      System.out.println("Can't close door " + this.getDoor().getId()
+      LOGGER.warn("Can't close door " + this.getDoor().getId()
               + " because it's already closed");
     }
   }
@@ -38,13 +40,13 @@ public class Unlocked extends DoorState {
     if (this.getDoor().isClosed()) {
       this.getDoor().setState(new Locked(this.getDoor()));
     } else {
-      System.out.println("Can't lock door " + this.getDoor().getId()
+      LOGGER.warn("Can't lock door " + this.getDoor().getId()
               + " because it's open");
     }
   }
 
   public void unlock() {
-    System.out.println("Can't unlock door " + this.getDoor().getId()
+    LOGGER.warn("Can't unlock door " + this.getDoor().getId()
             + " because it's already unlocked");
   }
 

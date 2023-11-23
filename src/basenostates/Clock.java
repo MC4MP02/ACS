@@ -1,10 +1,9 @@
 package basenostates;
 
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Clock extends Observable {
+public final class Clock extends Observable {
     private Timer timer = new Timer();
     private Long dateTime;
 
@@ -17,8 +16,11 @@ public class Clock extends Observable {
         this.timer = new Timer();
     }
 
+    /**
+     * Check that the clock is not initialized and start the timer.
+     */
     public void iniciarReloj() {
-        if(!relojIniciado) {
+        if (!relojIniciado) {
             this.timer = new Timer();
             this.timer.scheduleAtFixedRate(new ClockTask(), 0,
                     1000);
@@ -27,7 +29,10 @@ public class Clock extends Observable {
 
     }
 
-    private class ClockTask extends TimerTask {
+    /**
+     * Class to make the timer and notify the observers.
+     */
+    private final class ClockTask extends TimerTask {
         @Override
         public void run() {
             setChanged(true);
@@ -36,6 +41,9 @@ public class Clock extends Observable {
         }
     }
 
+    /**
+     * Check if the clock is running and stop the timer
+     */
     public void stopClock() {
         if (relojIniciado) {
             deteniendoReloj = true;
