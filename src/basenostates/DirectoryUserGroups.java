@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 public final class DirectoryUserGroups {
   private static final Logger LOGGER =
-          LoggerFactory.getLogger(DirectoryUserGroups.class);
+          LoggerFactory.getLogger("fita1");
   private DirectoryUserGroups() {
   }
   private static final Integer ONE = 1;

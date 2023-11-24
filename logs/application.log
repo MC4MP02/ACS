@@ -1,0 +1,108 @@
+11:34:44.875 [main] DEBUG fita2 - Creating clock
+11:34:44.906 [main] INFO  fita1 - Server started.
+Listening for connections on port : 8080 ...
+
+11:34:48.181 [Thread-2] INFO  fita1 - sockedthread : GET /refresh HTTP/1.1
+11:34:48.182 [Thread-2] INFO  fita1 - input GET /refresh HTTP/1.1
+11:34:48.182 [Thread-2] INFO  fita1 - method GET
+11:34:48.184 [Thread-2] INFO  fita1 - resource /refresh
+11:34:48.191 [Thread-2] INFO  fita1 - tokens : 
+11:34:48.191 [Thread-2] INFO  fita1 - refresh, 
+11:34:48.191 [Thread-2] INFO  fita1 - null, 
+11:34:48.191 [Thread-2] INFO  fita1 - null, 
+11:34:48.191 [Thread-2] INFO  fita1 - null, 
+11:34:48.191 [Thread-2] INFO  fita1 - null, 
+11:34:48.191 [Thread-2] INFO  fita1 - null, 
+11:34:48.191 [Thread-2] INFO  fita1 - null, 
+11:34:48.191 [Thread-2] INFO  fita1 - null, 
+11:34:48.191 [Thread-2] INFO  fita1 - null, 
+11:34:48.191 [Thread-2] INFO  fita1 - null, 
+11:34:48.191 [Thread-2] INFO  fita1 - null, 
+11:34:48.204 [Thread-2] INFO  fita1 - null, 
+11:34:48.204 [Thread-2] INFO  fita1 - null, 
+11:34:48.204 [Thread-2] INFO  fita1 - null, 
+11:34:48.204 [Thread-2] INFO  fita1 - null, 
+11:34:48.204 [Thread-2] INFO  fita1 - null, 
+11:34:48.204 [Thread-2] INFO  fita1 - null, 
+11:34:48.204 [Thread-2] INFO  fita1 - null, 
+11:34:48.206 [Thread-2] INFO  fita1 - null, 
+11:34:48.206 [Thread-2] INFO  fita1 - null, 
+11:34:48.206 [Thread-2] INFO  fita1 - 
+11:34:48.206 [Thread-2] INFO  fita1 - created request refresh RequestRefresh{[]}
+11:34:48.227 [Thread-2] INFO  fita1 - [Door{, id='D1', closed=true, state=unlocked}, Door{, id='D2', closed=true, state=unlocked}, Door{, id='D3', closed=true, state=unlocked}, Door{, id='D4', closed=true, state=unlocked}, Door{, id='D5', closed=true, state=unlocked}, Door{, id='D6', closed=true, state=unlocked}, Door{, id='D7', closed=true, state=unlocked}, Door{, id='D8', closed=true, state=unlocked}, Door{, id='D9', closed=true, state=unlocked}]
+11:34:48.238 [Thread-2] INFO  fita1 - processed request refresh RequestRefresh{[{"closed":true,"id":"D1","state":"unlocked"}, {"closed":true,"id":"D2","state":"unlocked"}, {"closed":true,"id":"D3","state":"unlocked"}, {"closed":true,"id":"D4","state":"unlocked"}, {"closed":true,"id":"D5","state":"unlocked"}, {"closed":true,"id":"D6","state":"unlocked"}, {"closed":true,"id":"D7","state":"unlocked"}, {"closed":true,"id":"D8","state":"unlocked"}, {"closed":true,"id":"D9","state":"unlocked"}]}
+11:34:48.239 [Thread-2] INFO  fita1 - answer
+HTTP/1.0 200 OK
+Content-type: application/json
+Access-Control-Allow-Origin: *
+
+{"doors":[{"closed":true,"id":"D1","state":"unlocked"},{"closed":true,"id":"D2","state":"unlocked"},{"closed":true,"id":"D3","state":"unlocked"},{"closed":true,"id":"D4","state":"unlocked"},{"closed":true,"id":"D5","state":"unlocked"},{"closed":true,"id":"D6","state":"unlocked"},{"closed":true,"id":"D7","state":"unlocked"},{"closed":true,"id":"D8","state":"unlocked"},{"closed":true,"id":"D9","state":"unlocked"}]}
+11:35:02.154 [Thread-3] INFO  fita1 - sockedthread : GET /reader?credential=11343&action=open&datetime=2023-11-24T09:30&doorId=D3 HTTP/1.1
+11:35:02.155 [Thread-3] INFO  fita1 - input GET /reader?credential=11343&action=open&datetime=2023-11-24T09:30&doorId=D3 HTTP/1.1
+11:35:02.155 [Thread-3] INFO  fita1 - method GET
+11:35:02.155 [Thread-3] INFO  fita1 - resource /reader?credential=11343&action=open&datetime=2023-11-24T09:30&doorId=D3
+11:35:02.157 [Thread-3] INFO  fita1 - tokens : 
+11:35:02.157 [Thread-3] INFO  fita1 - reader, 
+11:35:02.157 [Thread-3] INFO  fita1 - credential, 
+11:35:02.158 [Thread-3] INFO  fita1 - 11343, 
+11:35:02.158 [Thread-3] INFO  fita1 - action, 
+11:35:02.159 [Thread-3] INFO  fita1 - open, 
+11:35:02.159 [Thread-3] INFO  fita1 - datetime, 
+11:35:02.160 [Thread-3] INFO  fita1 - 2023-11-24T09:30, 
+11:35:02.160 [Thread-3] INFO  fita1 - doorId, 
+11:35:02.160 [Thread-3] INFO  fita1 - D3, 
+11:35:02.160 [Thread-3] INFO  fita1 - null, 
+11:35:02.161 [Thread-3] INFO  fita1 - null, 
+11:35:02.161 [Thread-3] INFO  fita1 - null, 
+11:35:02.161 [Thread-3] INFO  fita1 - null, 
+11:35:02.163 [Thread-3] INFO  fita1 - null, 
+11:35:02.163 [Thread-3] INFO  fita1 - null, 
+11:35:02.163 [Thread-3] INFO  fita1 - null, 
+11:35:02.163 [Thread-3] INFO  fita1 - null, 
+11:35:02.164 [Thread-3] INFO  fita1 - null, 
+11:35:02.164 [Thread-3] INFO  fita1 - null, 
+11:35:02.164 [Thread-3] INFO  fita1 - null, 
+11:35:02.164 [Thread-3] INFO  fita1 - 
+11:35:02.184 [Thread-3] INFO  fita1 - created request reader Request{credential=11343, userName=unknown, action=open, now=2023-11-24T09:30, doorID=D3, closed=false, authorized=false, reasons=[]}
+11:35:02.184 [Thread-3] INFO  fita1 - processed request reader Request{credential=11343, userName=unknown, action=open, now=2023-11-24T09:30, doorID=D3, closed=false, authorized=true, reasons=[]}
+11:35:02.184 [Thread-3] INFO  fita1 - answer
+HTTP/1.0 200 OK
+Content-type: application/json
+Access-Control-Allow-Origin: *
+
+{"reasons":[],"authorized":true,"action":"open","closed":false,"state":"unlocked","doorId":"D3"}
+11:35:07.012 [Thread-4] INFO  fita1 - sockedthread : GET /reader?credential=11343&action=lock&datetime=2023-11-24T09:30&doorId=D3 HTTP/1.1
+11:35:07.014 [Thread-4] INFO  fita1 - input GET /reader?credential=11343&action=lock&datetime=2023-11-24T09:30&doorId=D3 HTTP/1.1
+11:35:07.014 [Thread-4] INFO  fita1 - method GET
+11:35:07.014 [Thread-4] INFO  fita1 - resource /reader?credential=11343&action=lock&datetime=2023-11-24T09:30&doorId=D3
+11:35:07.014 [Thread-4] INFO  fita1 - tokens : 
+11:35:07.016 [Thread-4] INFO  fita1 - reader, 
+11:35:07.016 [Thread-4] INFO  fita1 - credential, 
+11:35:07.016 [Thread-4] INFO  fita1 - 11343, 
+11:35:07.016 [Thread-4] INFO  fita1 - action, 
+11:35:07.016 [Thread-4] INFO  fita1 - lock, 
+11:35:07.016 [Thread-4] INFO  fita1 - datetime, 
+11:35:07.016 [Thread-4] INFO  fita1 - 2023-11-24T09:30, 
+11:35:07.016 [Thread-4] INFO  fita1 - doorId, 
+11:35:07.016 [Thread-4] INFO  fita1 - D3, 
+11:35:07.016 [Thread-4] INFO  fita1 - null, 
+11:35:07.016 [Thread-4] INFO  fita1 - null, 
+11:35:07.016 [Thread-4] INFO  fita1 - null, 
+11:35:07.016 [Thread-4] INFO  fita1 - null, 
+11:35:07.016 [Thread-4] INFO  fita1 - null, 
+11:35:07.016 [Thread-4] INFO  fita1 - null, 
+11:35:07.016 [Thread-4] INFO  fita1 - null, 
+11:35:07.016 [Thread-4] INFO  fita1 - null, 
+11:35:07.016 [Thread-4] INFO  fita1 - null, 
+11:35:07.016 [Thread-4] INFO  fita1 - null, 
+11:35:07.016 [Thread-4] INFO  fita1 - null, 
+11:35:07.018 [Thread-4] INFO  fita1 - 
+11:35:07.018 [Thread-4] INFO  fita1 - created request reader Request{credential=11343, userName=unknown, action=lock, now=2023-11-24T09:30, doorID=D3, closed=false, authorized=false, reasons=[]}
+11:35:07.018 [Thread-4] WARN  fita1 - Can't lock door D3 because it's open
+11:35:07.018 [Thread-4] INFO  fita1 - processed request reader Request{credential=11343, userName=unknown, action=lock, now=2023-11-24T09:30, doorID=D3, closed=false, authorized=true, reasons=[]}
+11:35:07.018 [Thread-4] INFO  fita1 - answer
+HTTP/1.0 200 OK
+Content-type: application/json
+Access-Control-Allow-Origin: *
+
+{"reasons":[],"authorized":true,"action":"lock","closed":false,"state":"unlocked","doorId":"D3"}

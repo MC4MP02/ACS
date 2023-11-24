@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
  *When the door is unlocked we can open, close and lock it.
  */
 public class Unlocked extends DoorState {
-  private static final Logger LOGGER = LoggerFactory.getLogger(Unlocked.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger("fita1");
   //sets the door state to unlocked
   public Unlocked(final Door door) {
     super(door);

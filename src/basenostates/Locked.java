@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
  */
 
 public class Locked extends DoorState {
-  private static final Logger LOGGER = LoggerFactory.getLogger(Locked.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger("fita1");
 
   // sets the state of the door to Locked
   public Locked(final Door door) {

@@ -12,7 +12,10 @@ import org.slf4j.LoggerFactory;
 
 public final class DirectoryDoorsAndAreas {
   private static final Logger LOGGER =
-          LoggerFactory.getLogger(DirectoryDoorsAndAreas.class);
+          LoggerFactory.getLogger("fita1");
+
+  private static final Logger LOGGER2 = LoggerFactory.getLogger("fita2");
+
   /**
    * array to safe all the doors
    * and be able to search for them.
@@ -75,6 +78,7 @@ public final class DirectoryDoorsAndAreas {
 
     root = building;
 
+    LOGGER2.debug("Creating clock");
     Clock clock = Clock.getInstance();
     // basement
     Door d1 = new Door("D1", exterior, parking,

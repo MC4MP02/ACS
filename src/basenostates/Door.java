@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
  */
 
 public class Door implements Observer {
-  private static final Logger LOGGER = LoggerFactory.getLogger(Door.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger("fita1");
   private final String id;
   private final Area from;
   private final Area to;

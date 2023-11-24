@@ -3,10 +3,14 @@
 skinparam classAttributeIconSize 0
 
 class Webserver {
+- {static} LOGGER : Logger
 - {static} PORT :int
 - {static} FORMATTER : DateTimeFormatter
+- {static} instance : Webserver
 + Webserver()
++ {static} getInstance() : Webserver
 }
+Webserver --> Webserver : instance
 
 class SocketThread {
 - insocked : Socked
@@ -29,25 +33,30 @@ class UserGroup {
 - id : String
 - schedule : Schedule
 - actions : String[]
-- users : User[]
-- areas : Area[]
 + UserGroup(id : String, schedule : Schedule, actions : String[],users : User[], areas : Area[])
 + getUsers() : User[]
 + getAreas() : Area[]
 + getActions() : String[]
 + getSchedule() : Schedule
 }
+UserGroup --> Area : areas
+UserGroup --> User : users
 DirectoryUserGroups o--> "1..*" UserGroup : "userGroups"
 Schedule --> "*" UserGroup : schedule
 UserGroup : *--> "*" User : users
 
-class Door {
+class Door implements Observer{
+- {static} LOGGER : Logger
 - id : String
 - from : Area
 - to : Area
 - closed : boolean
-+ state : DoorState
+- state : DoorState
+- tiempoInicio : boolean
 + Door(id : String)
++ getClock() : Clock
++ setTiempoInicio(tInicio : Long)
++ update(o : Observable, dateTime : Long)
 + processRequest(request : RequestReader)
 + setState(doorState : DoorState)
 + toJson() : JSONObject
@@ -60,6 +69,7 @@ class Door {
 + getFrom() : Area
 - doAction(action : String)
 }
+Door ---> "1..*" Clock : "clock"
 
 abstract class DoorState{
 #door : Door
@@ -73,7 +83,22 @@ abstract class DoorState{
 + setName(name : String)
 }
 
+abstract class Observable {
+- changed : boolean
+- deteniendoReloj : boolean
++ isDeteniendoReloj() : boolean
++ deleteObserver(ob : Observer)
++ setChanged(cambiado : boolean)
++ notifyObserver(dateTime : Long)
+}
+Observable --> Observer : observers
+
+interface Observer {
+update(o : Observable, dateTime : Long)
+}
+
 class Unlocked extends DoorState {
+- {static} LOGGER : Logger
 + Unlocked(door : Door)
 + open()
 + close()
@@ -83,6 +108,7 @@ class Unlocked extends DoorState {
 }
 
 class Locked extends DoorState {
+- {static} LOGGER : Logger
 + Locked(door : Door)
 + open()
 + close()
@@ -92,6 +118,7 @@ class Locked extends DoorState {
 }
 
 class UnlockedShortly extends DoorState {
+- {static} LOGGER : Logger
 + UnlockedShortly(door : Door)
 + open()
 + close()
@@ -101,6 +128,7 @@ class UnlockedShortly extends DoorState {
 }
 
 class Propped extends DoorState {
+- {static} LOGGER : Logger
 + Propped(door : Door)
 + open()
 + close()
@@ -135,14 +163,33 @@ class User {
 
 
 abstract class Area {
-# id : String
-# doors : List<Door>
+- id : String
+- doors : List<Door>
 + Area(id : String)
-+ {abstract} getId() : String
++ getId() : String
 + {abstract} getFrom() : Area
 + {abstract} getDoors() : Door[]
 + {abstract} getDoorsGivingAccess() : Door[]
 + {abstract} findAreaById(id : String) : Area
+}
+
+class Clock extends Observable{
+- timer : Timer
+- dateTime : Long
+- relojIniciado : boolean
+- deteniendoReloj : boolean
+- {static} instance : Clock
+- Clock()
++ iniciarReloj()
++ stopClock()
++ isDeteniendoReloj() : boolean
++ {static} getInstance() : Clock
+}
+
+Clock --> Clock : instance
+
+class ClockTask extends TimerTask {
++ run()
 }
 
 class Partitions extends Area {
@@ -183,6 +230,7 @@ class Schedule {
 }
 
 class DirectoryDoorsAndAreas {
+- {static} LOGGER : Logger
 - {static} allAreas : Area[]
 - {static} allDoors : Door[]
 - {static} root : Area
@@ -196,6 +244,9 @@ DirectoryDoorsAndAreas --> "*" Area : "allAreas"
 DirectoryDoorsAndAreas --> "*" Door : "allDoors"
 
 class DirectoryUserGroups {
+- {static} LOGGER : Logger
+- {static} ONE : Integer
+- {static} YEAR : Integer
 - {static} userGroups : UserGroups[]
 + {static} makeUserGroup()
 + {static} findUserByCredential(credential : String) : User

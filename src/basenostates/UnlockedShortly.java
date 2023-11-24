@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
  */
 public class UnlockedShortly extends DoorState {
   private static final Logger LOGGER =
-          LoggerFactory.getLogger(UnlockedShortly.class);
+          LoggerFactory.getLogger("fita1");
   //basic class constructor
   public UnlockedShortly(final Door door) {
     super(door);

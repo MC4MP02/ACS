@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
  *and no one closes it.
  */
 public class Propped extends DoorState {
-  private static final Logger LOGGER = LoggerFactory.getLogger(Propped.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger("fita1");
 
   // class constructor
   public Propped(final Door doorId) {

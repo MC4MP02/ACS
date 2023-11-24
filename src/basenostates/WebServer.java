@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
  *     ...</a>
  */
 public final class WebServer {
-  private static final Logger LOGGER = LoggerFactory.getLogger(Unlocked.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger("fita1");
   private static final int PORT = 8080; // port to listen connection
   private static final DateTimeFormatter FORMATER =
           DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
