@@ -1,5 +1,7 @@
 package basenostates;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -46,4 +48,6 @@ public abstract class Area {
     public void setDoors(final ArrayList<Door> doorsSet) {
         this.doors = doorsSet;
     }
+
+    public abstract JSONObject toJson(int depth);
 }

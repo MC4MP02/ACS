@@ -1,5 +1,8 @@
 package basenostates;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -58,5 +61,17 @@ public class Spaces extends Area {
   @Override
   public String getId() {
     return super.getId();
+  }
+
+  public JSONObject toJson(int depth) { // depth not used here
+    JSONObject json = new JSONObject();
+    json.put("class", "space");
+    json.put("id", getId());
+    JSONArray jsonDoors = new JSONArray();
+    for (Door d : getDoorsGivingAccess()) {
+      jsonDoors.put(d.toJson());
+    }
+    json.put("access_doors", jsonDoors);
+    return json;
   }
 }

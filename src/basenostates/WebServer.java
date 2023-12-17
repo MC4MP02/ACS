@@ -160,8 +160,7 @@ public final class WebServer {
           //TO DO: this is to be implemented when programming the mobile app
           // in Flutter in order to navigate the hierarchy of partitions,
           // spaces and doors
-          assert false : "request get_children is not yet implemented";
-          request = null;
+          request = makeRequestChildren(tokens);
           System.exit(-1);
           break;
         default:
@@ -171,6 +170,11 @@ public final class WebServer {
           System.exit(-1);
       }
       return request;
+    }
+
+    private RequestChildren makeRequestChildren(String[] tokens) {
+      String areaId = tokens[1];
+      return new RequestChildren(areaId);
     }
 
     private RequestReader makeRequestReader(final String[] tokens) {

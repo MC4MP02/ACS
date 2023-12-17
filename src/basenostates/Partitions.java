@@ -1,5 +1,8 @@
 package basenostates;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
@@ -67,5 +70,21 @@ public class Partitions extends Area {
   @Override
   public String getId() {
     return super.getId();
+  }
+
+  public JSONObject toJson(int depth) {
+    // for depth=1 only the root and children,
+    // for recusive = all levels use Integer.MAX_VALUE
+    JSONObject json = new JSONObject();
+    json.put("class", "partition");
+    json.put("id", getId());
+    JSONArray jsonAreas = new JSONArray();
+    if (depth > 0) {
+      for (Area a : childs) {
+        jsonAreas.put(a.toJson(depth - 1));
+      }
+      json.put("areas", jsonAreas);
+    }
+    return json;
   }
 }
