@@ -1,7 +1,11 @@
-package basenostates;
+package basenostates.requests;
 
+import basenostates.Area;
+import basenostates.DirectoryDoorsAndAreas;
 import basenostates.requests.Request;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RequestChildren implements Request {
   private final String areaId;

@@ -1,9 +1,6 @@
 package basenostates;
 
-import basenostates.requests.Request;
-import basenostates.requests.RequestReader;
-import basenostates.requests.RequestRefresh;
-import basenostates.requests.RequestArea;
+import basenostates.requests.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -157,11 +154,7 @@ public final class WebServer {
           request = makeRequestArea(tokens);
           break;
         case "get_children":
-          //TO DO: this is to be implemented when programming the mobile app
-          // in Flutter in order to navigate the hierarchy of partitions,
-          // spaces and doors
           request = makeRequestChildren(tokens);
-          System.exit(-1);
           break;
         default:
           // just in case we change the user interface or the simulator

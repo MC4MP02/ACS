@@ -116,7 +116,14 @@ public final class DirectoryDoorsAndAreas {
   // function for search in all the areas by the id
   // return: area that matches the id
   public static Area findAreaById(final String id) {
-    return root.findAreaById(id);
+    if (id.equals("ROOT")) {
+      // Special id that means that the wanted area is the root.
+      // This is because the Flutter app client doesn't know the
+      // id of the root, differently from the simulator
+      return root;
+    }else{
+      return root.findAreaById(id);
+    }
   }
 
   // this is needed by RequestRefresh
